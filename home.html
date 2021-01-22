@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vertex System</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <style>
+        /*-------------- */
+        .helpfull:hover {
+            color: #4f167c;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .harmfull:hover {
+            color: #4f167c;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /*-------------- */
+        .influencevs:hover {
+            color: blue;
+            background-color: #e6e7e9;
+        }
+
+        /* ------------- */
+        li>div>a:hover {
+            /* font-weight: bold; */
+            background-color: azure;
+            color: blue !important;
+        }
+
+        li>div>ul>li>a:hover {
+            font-weight: bold;
+            background-color: azure;
+            color: blue !important;
+        }
+
+        .nvs:hover {
+            font-size: 15px;
+            padding-bottom: 1%;
+            font-weight: bold;
+            color: blue !important;
+        }
+
+        .nvsHover:hover {
+            border-bottom: 2px solid red;
+        }
+
+        .nvsHover.active {
+            border-bottom: 2px solid red;
+        }
+
+        .headerSearch {
+            padding-right: 50% !important;
+            border-top: none !important;
+            background-color: #f8f9fa;
+            border-left: none !important;
+            border-right: none !important;
+        }
+
+        input {
+            outline: none !important;
+        }
+
+        @media (max-width: 1000px) {
+            #Searchtext {
+                display: inline-block;
+                width: 100%;
+                vertical-align: middle;
+                margin-right: .5rem !important;
+            }
+
+            #btnSubmit {
+                margin-top: 20px !important;
+            }
+        }
+
+        /* ------------------------------------------------ */
+
+        #myVideo {
+            position: static;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+        }
+
+        .contentabc {
+            position: absolute;
+            bottom: 20px;
+            color: #f1f1f1;
+            width: 100%;
+            padding: 20px;
+        }
+
+        @media (max-width: 1100px) {
+            .contentabc {
+                position: absolute;
+                bottom: 50px;
+                color: #f1f1f1;
+                width: 100%;
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 1000px) {
+            .contentabc {
+                position: absolute;
+                bottom: 90px;
+                color: #f1f1f1;
+                width: 100%;
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .contentabc {
+                position: absolute;
+                bottom: 83px;
+                color: #f1f1f1;
+                width: 100%;
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 800px) {
+            .contentabc {
+                position: absolute;
+                bottom: 110px;
+                color: #f1f1f1;
+                width: 100%;
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .contentabc {
+                position: absolute;
+                bottom: 75px;
+                color: #f1f1f1;
+                width: 100%;
+                padding: 20px;
+            }
+        }
+
+        #myBtn {
+            width: 200px;
+            font-size: 18px;
+            padding: 10px;
+            border: none;
+            background: #000;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        #myBtn:hover {
+            background: #ddd;
+            color: black;
+        }
+
+        /* ---------------------------------------------- */
+
+        .btnHover {
+            border-radius: 4px;
+            background-color: #f4511e;
+            border: none;
+            color: #FFFFFF;
+            text-align: center;
+            font-size: 20px;
+
+
+            transition: all 0.5s;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .btnHover span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+        }
+
+        .btnHover span:after {
+            content: '\00bb';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -20px;
+            transition: 0.5s;
+        }
+
+        .btnHover:hover span {
+            padding-right: 30px;
+        }
+
+        .btnHover:hover span:after {
+            opacity: 1;
+            right: 0;
+        }
+
+        /* ------------------------------------- */
+        .classificationVirus:hover {
+            opacity: 85%;
+        }
+    </style>
+
+</head>
+
+<body>
+    <header>
+
+    </header>
+    <div class="container" style="padding-left: 0px;padding-right: 0px;">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="position:sticky;">
+            <a class="navbar-brand" href="home.html"><img src="images/logo_short-200x71.png" alt=""
+                    style="width: 70%;"></a>
+            <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse"
+                data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="collapsibleNavId" style="width: 100%;">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0" style="margin-right: 0px !important; width: 70%;">
+                    <li class="nav-item active nvs nvsHover" style="padding-right: 2rem;">
+                        <a class="nav-link" href="home.html">Home<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item nvs nvsHover" style="padding-right: 2rem;">
+                        <a class="nav-link" href="aboutus.html">About us</a>
+                    </li>
+
+                    <li class="nav-item nvs nvsHover" style="padding-right: 2rem;">
+                        <a class="nav-link" href="typeOFVirus.html">Types of virus</a>
+                    </li>
+                    <li class="nav-item nvs nvsHover" style="padding-right: 2rem;">
+                        <a class="nav-link" href="yearWiseListing.html">Year wise listing</a>
+                    </li>
+                    <li class="nav-item nvs nvsHover" style="padding-right: 2rem;">
+                        <a class="nav-link" href="contactus.html">Contact us</a>
+                    </li>
+                </ul>
+
+                <form class="form-inline my-2 my-lg-0 " style="flex-flow: nowrap !important;width: 30%;">
+                    <div class="input-group mb-3" style="margin-top: 10px; width: 100% !important;">
+                        <input id="headerSearch" type="text" class="form-control headerSearch" placeholder="Search">
+                        <div class="input-group-append">
+                            <span class="input-group-text" style="border: none !important;background-color: #f8f9fa;"><a
+                                    href=""><i class="fa fa-search" style="font-size: 20px;"></i></a></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </nav>
+    </div>
+
+    <section>
+        <div class="container" style="padding: 2%;">
+            <div class="row" style="margin-bottom: 4.5%;">
+                <img src="images/virus" alt="" style="width: 100%;height: 500px;">
+            </div>
+
+            <div class="row" style="margin-bottom: 2.5%;">
+                <h2 id="AboutVertexSystem"
+                    style="color: white;margin-top: 2%;padding-top: 1%;padding-bottom: 1%;text-align: center;width: 100%; background-color: #4f167c;">
+                    <strong>Overview</strong>
+                </h2>
+            </div>
+            <div class="row" style="margin-top: 1%;">
+                <div class="col-sm-5 col-md-5 col-lg-5">
+                    <div class="row">
+                        <div class="col-sm-10 col-md-10 col-lg-10">
+                            <img src="images/tongquanvirus3.jpg" alt="" style="width: 100%;height: 350px;">
+                        </div>
+                        <div class="col-sm-2 col-md-2 col-lg-2">
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-sm-7 col-md-7 col-lg-7">
+                    <div class="row" style="padding-left: 2%;">
+                        <p style="color: #813588;width: 100%;text-align: left;font-size: 30px;font-weight: bold;">About
+                            Vertex
+                            System</p>
+                    </div>
+                    <div class="row" style="padding-left: 2%;">
+                        <p style="color: #4b4e53;font-size: 20px;font-weight: bold;">
+                            Provide users with information, images about the word virus
+                        </p>
+                    </div>
+                    <div class="row" style="background-color: #4b4e53; height: 2px;width: 20%;float: left;height: 3px;">
+
+                    </div>
+                    <br>
+                    <div class="row" style="position: relative;">
+                        <div class="col-sm-6 col-md-6 col-lg-6" style="display: inline-block;">
+                            <div class="row col-sm-12 col-md-12 col-lg-12" style="flex-wrap: nowrap;">
+                                <div class="col-sm-5 col-md-5 col-lg-5">
+                                    <img src="images/khainiem.jpg" alt="" style="width: 100px">
+                                </div>
+                                <div class="col-sm-7 col-md-7 col-lg-7">
+                                    <h4 style="color: #4b4e53;">VIRUS</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="row col-sm-12 col-md-12 col-lg-12" style="flex-wrap: nowrap;">
+                                <div class="col-sm-5 col-md-5 col-lg-5">
+                                    <img src="images/phanloai.jpg" alt="" style="width: 100px;">
+                                </div>
+                                <div class="col-sm-7 col-md-7 col-lg-7">
+                                    <h4 style="color: #4b4e53;">CLASSIFICATION</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" style="position: relative; margin-top: 2%;">
+                        <div class="col-sm-6 col-md-6 col-lg-6" style="display: inline-block;">
+                            <div class="row col-sm-12 col-md-12 col-lg-12" style="flex-wrap: nowrap;">
+                                <div class="col-sm-5 col-md-5 col-lg-5">
+                                    <img src="images/nguongoc.jpg" alt="" style="width: 100px;">
+                                </div>
+                                <div class="col-sm-7 col-md-7 col-lg-7">
+                                    <h4 style="color: #4b4e53;">LOCATION</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="row col-sm-12 col-md-12 col-lg-12" style="flex-wrap: nowrap;">
+                                <div class="col-sm-5 col-md-5 col-lg-5">
+                                    <img src="images/phonghong.jpg" alt="" style="width: 100px;">
+                                </div>
+                                <div class="col-sm-7 col-md-7 col-lg-7">
+                                    <h4 style="color: #4b4e53;">PROTECT</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 4.5%;">
+                <div class="col-sm-5 col-md-5 col-lg-5">
+                    <div>
+                        <h2
+                            style="padding-top: 1%;padding-bottom: 1%;text-align: left;width: 100%; color: #813588;font-size: 30px;font-weight: bold;">
+                            <span>ABOUT VIRUS </span>
+                        </h2>
+                        <p style="color: #4b4e53;font-size: 17px; font-weight: bold;">
+                            Viruses are known to be the cause of human diseases such as smallpox, yellow fever, AIDS
+                            (acquired immunodeficiency syndrome), COVID-19, ... This organism can also attack / infect
+                            plants, animals, bacteria and fungi.
+                            <br>
+                            Join us to learn more about this microorganism.
+                        </p>
+                        <a href="index.html" class="btn btn-primary btnHover"><span>Read More</span></a>
+                    </div>
+                </div>
+                <div class="col-sm-7 col-md-7 col-lg-7">
+                    <div style="position: relative;">
+                        <video autoplay muted loop id="myVideo" style="height: 400px; width: 100%;">
+                            <source src="media/videoDemoHome.mp4" type="video/mp4">
+                            Your browser does not support HTML5 video.
+                        </video>
+
+                        <div class="contentabc" style="position: absolute;">
+                            <p>One of the dangerous virus groups currently 1 one of the dangerous viruses currently </p>
+                            <button id="myBtn" onclick="myFunction()">Pause</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row" style="margin-top: 4.5%;margin-bottom: 0px;">
+                <h2
+                    style="color: white;text-align: center;margin-bottom: 0px;width: 100%; color: #4f167c;font-size: 30px;font-weight: bold;">
+                    <span>CLASSIFICATION BASE ON</span>
+                </h2>
+            </div>
+
+            <div class="row" style="margin-top: 4.5%;">
+                <div class="col-sm-4 col-md-4 col-lg-4 classificationVirus" style="min-height: 200px;padding: 2%;">
+                    <div style="padding: 2%;box-shadow: #5da6ee 0px 0px 4px 0px;">
+                        <div class="row">
+                            <div class="col-sm-1 col-md-1 col-lg-1">
+
+                            </div>
+                            <div class="col-sm-10 col-md-10 col-lg-10">
+                                <img src="images/phanloaitheoacid.png" alt="" style="width: 100%;height: 150px;">
+                            </div>
+                            <div class="col-sm-1 col-md-1 col-lg-1">
+
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:1%;">
+                            <h5 style="text-align: center;width: 100%; font-size: 16px;font-weight: bold;">
+                                NUCLEIC ACID
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4 classificationVirus" style="min-height: 200px;padding: 2%;">
+                    <div style="padding: 2%;box-shadow: #5da6ee 0px 0px 4px 0px;">
+                        <div class="row">
+                            <div class="col-sm-1 col-md-1 col-lg-1">
+
+                            </div>
+                            <div class="col-sm-10 col-md-10 col-lg-10">
+                                <img src="images/structurePhanLoai.jpg" alt="" style="width: 100%;height: 150px;">
+                            </div>
+                            <div class="col-sm-1 col-md-1 col-lg-1">
+
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:1%;">
+                            <h5 style="text-align: center;width: 100%; font-size: 16px;font-weight: bold;">
+                                THE STRUCTURE
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4 classificationVirus" style="min-height: 200px;padding: 2%;">
+                    <div style="padding: 2%;box-shadow: #5da6ee 0px 0px 4px 0px;">
+                        <div class="row">
+                            <div class="col-sm-1 col-md-1 col-lg-1">
+
+                            </div>
+                            <div class="col-sm-10 col-md-10 col-lg-10">
+                                <img src="images/phanloaiReplication.png" alt="" style="width: 100%;height: 150px;">
+                            </div>
+                            <div class="col-sm-1 col-md-1 col-lg-1">
+
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:1%;">
+                            <h5 style="text-align: center;width: 100%; font-size: 16px;font-weight: bold;">
+                                THE REPLICATION PROPERTIES
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 1%;">
+                <div class="col-sm-4 col-md-4 col-lg-4 classificationVirus" style="min-height: 200px;padding: 2%;">
+                    <div style="padding: 2%;box-shadow: #5da6ee 0px 0px 4px 0px;">
+                        <div class="row">
+                            <div class="col-sm-1 col-md-1 col-lg-1">
+
+                            </div>
+                            <div class="col-sm-10 col-md-10 col-lg-10">
+                                <img src="images/phanloaiHotRange.jpg" alt="" style="width: 100%;height: 150px;">
+                            </div>
+                            <div class="col-sm-1 col-md-1 col-lg-1">
+
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:1%;">
+                            <h5 style="text-align: center;width: 100%; font-size: 16px;font-weight: bold;">
+                                THE HOST RANGE
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4 classificationVirus" style="min-height: 200px;padding: 2%;">
+                    <div style="padding: 2%;">
+
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4 classificationVirus" style="min-height: 200px;padding: 2%;">
+                    <div style="padding: 2%;box-shadow: #5da6ee 0px 0px 4px 0px;">
+                        <div class="row">
+                            <div class="col-sm-1 col-md-1 col-lg-1">
+
+                            </div>
+                            <div class="col-sm-10 col-md-10 col-lg-10">
+                                <img src="images/TransmissionPhanLoai.jpg" alt="" style="width: 100%;height: 150px;">
+                            </div>
+                            <div class="col-sm-1 col-md-1 col-lg-1">
+
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:1%;">
+                            <h5 style="text-align: center;width: 100%; font-size: 16px;font-weight: bold;">
+                                THE MODE OF TRANSMISSION
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 4.5%;">
+                <div class="row">
+                    <h2
+                        style="padding-bottom: 1%;text-align: center;width: 100%; color: #813588;font-size: 30px;font-weight: bold;">
+                        <span>THE ORIGIN LOCATION </span>
+                    </h2>
+                    <p style="color: #4b4e53;font-size: 17px; font-weight: bold;text-align: center;width: 100%;">
+                        The Vertex system provides the origin location corresponding to each virus group
+                        Join us to find out more
+                    </p>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 4.5%;">
+                <div class="row">
+                    <div class="col-sm-5 col-md-5 col-lg-5">
+                        <div>
+                            <h2
+                                style="padding-top: 1%;padding-bottom: 1%;text-align: left;width: 100%; color: #813588;font-size: 30px;font-weight: bold;">
+                                <span>PROTECT</span>
+                            </h2>
+                            <p style="color: #4b4e53;font-size: 17px; font-weight: bold;">
+                                Not only that, we also provide symptoms and preventive measures to protect the body
+                                against each virus
+                            </p>
+                            <a href="index.html" class="btn btn-primary btnHover"><span>Read More</span></a>
+                        </div>
+                    </div>
+                    <div class="col-sm-7 col-md-7 col-lg-7">
+                        <div style="position: relative;">
+                            <video autoplay muted loop id="myVideoas" style="height: 400px;width: 100%;">
+                                <source src="media/videoDemoHome.mp4" type="video/mp4">
+                                Your browser does not support HTML5 video.
+                            </video>
+
+                            <div class="contentabc">
+                                <p>One of the dangerous virus groups currently 1 one of the dangerous viruses currently
+                                </p>
+                                <button id="myBtnas" onclick="myFunction()">Pause</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 4.5%;">
+                <h2 id="AboutVertexSystem"
+                    style="color: white;margin-top: 2%;padding-top: 1%;padding-bottom: 1%;text-align: center;width: 100%; background-color: #4f167c;">
+                    <strong>Influence</strong>
+                </h2>
+            </div>
+
+            <div style="margin-top: 4.5%;position: relative;">
+                <div class="row">
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <img src="images/ngare.png" alt="workplace" style="width: 100%;height: 350px;">
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6" style="padding-top: 2%;">
+                        <div class="animated zoomIn zi" style="padding-left: 10px;">
+                            <div class="row">
+                                <span>Viruses are harmful with the ability to spread disease and spread disease:</span>
+                            </div>
+
+                            <div class="row" style="margin-top:1%">
+                                <i class="fa fa-chevron-circle-right" style="font-size: 27px;padding-right: 5px;"></i>
+                                <span class="influencevs">Bring diseases</span>
+                            </div>
+
+                            <div class="row" style="margin-top:1%">
+                                <i class="fa fa-chevron-circle-right" style="font-size: 27px;padding-right: 5px;"></i>
+                                <span class="influencevs">Attack the immune system</span>
+                            </div>
+
+                            <div class="row" style="margin-top:1%">
+                                <a href="" class="btn btn-primary btnHover" style="font-size: 15px;"><span>Some
+                                        pictures</span></a>
+                            </div>
+                        </div>
+                        <br>
+                        <div style="padding-top: 5%;padding-left: 10px;" class="animated zoomIn sol">
+                            <div class="row">
+                                <span>On the other hand, beneficial viruses bring many benefits to humans:</span>
+                            </div>
+
+                            <div class="row" style="margin-top:1%">
+                                <i class="fa fa-chevron-circle-right" style="font-size: 27px;padding-right: 5px;"></i>
+                                <span class="influencevs">AIDS digestion</span>
+                            </div>
+                            <div class="row" style="margin-top:1%">
+                                <i class="fa fa-chevron-circle-right" style="font-size: 27px;padding-right: 5px;"></i>
+                                <span class="influencevs">Prevent entry of harmful pathogens</span>
+                            </div>
+                            <div class="row" style="margin-top:1%">
+                                <i class="fa fa-chevron-circle-right" style="font-size: 27px;padding-right: 5px;"></i>
+                                <span class="influencevs">Helps to develop the immune system</span>
+                            </div>
+                            <div class="row" style="margin-top:1%">
+                                <a href="" class="btn btn-primary btnHover" style="font-size: 15px;"><span>Some
+                                        pictures</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <footer>
+        <div class="container" style="background-color: #c5c7c9;color: #4b4e53;margin-top: 2%;">
+            <div class="row" style="padding: 4%;">
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <div class="row">
+                        <h5>CONTACT US</h5>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <h6 style="color: black;">Address</h6>
+                    </div>
+                    <div class="row">
+                        <h6>VERTEX SYSTEMS, INC. <br> 2550 Corporate Exchange Drive, Suite 104, <br>
+                            Columbus, OH 43231
+                        </h6>
+                    </div>
+
+                    <div class="row">
+                        <h6>VERTEX SYSTEMS, INC.
+                            <br>
+                            P.O. Box 430
+                            <br>
+                            Newark, OH 43058-0430
+                        </h6>
+                    </div>
+                    <div class="row">
+                        <H6 style="color: black;">Phone</H6>
+                    </div>
+                    <div class="row">
+                        <h6>Please contact us at <span style="color: red;">800–536–3427</span> to arrange.
+                        </h6>
+                    </div>
+                    <div class="row">
+                        <ul class="list-unstyled d-flex ">
+                            <li><a href="#" class="p-2"><span class="fa fa-twitter"
+                                        style="font-size:1.5rem; color:#4b4e53;"></span></a>
+                            </li>
+                            <li><a href="#" class="p-2"><span class="fa fa-facebook"
+                                        style="font-size:1.5rem;color:#4b4e53;"></span></a>
+                            </li>
+                            <li><a href="#" class="p-2"><span class="fa fa-linkedin"
+                                        style="font-size:1.5rem;color:#4b4e53;"></span></a>
+                            </li>
+                            <li><a href="#" class="p-2"><span class="fa fa-instagram"
+                                        style="font-size:1.5rem;color:#4b4e53;"></span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <div class="row">
+                        <h5>SITE MAP</h5>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <a href="">
+                            <h6 style="color: black;">Home</h6>
+                        </a>
+                    </div>
+                    <div class="row">
+                        <a href="">
+                            <h6 style="color: black;">About us</h6>
+                        </a>
+                    </div>
+                    <div class="row">
+                        <a href="">
+                            <h6 style="color: black;">Types Of Virus</h6>
+                        </a>
+                    </div>
+                    <div class="row">
+                        <a href="">
+                            <h6 style="color: black;">Year wise listing</h6>
+                        </a>
+                    </div>
+                    <div class="row">
+                        <a href="">
+                            <h6 style="color: black;">Contact</h6>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <div class="row">
+                        <h5>TYPES OF VIRUS</h5>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <h6 style="color: black;">DNA VIRUS</h6>
+                    </div>
+                    <div class="row">
+                        <h6 style="color: black;">RNA VIRUS</h6>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <div class="row">
+                        <h5>MAP</h5>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12203.997837115712!2d-82.35875477328804!3d40.12001552909294!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x883817e2ed9c6475%3A0xd4db3b9bf4a74ea7!2sNewark%2C%20Ohio%2043058%2C%20Hoa%20K%E1%BB%B3!5e0!3m2!1svi!2s!4v1610331668802!5m2!1svi!2s"
+                            width="100%" height="250" frameborder="0" style="border:0;" allowfullscreen=""
+                            aria-hidden="false" tabindex="0"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
+<script>
+    $(document).ready(function (e) {
+        $(".zi").show();
+        $(".sol").show();
+        // $(".harmfull").hover(function () {
+        //     $(".zi").show();
+        //     // $(".sol").hide();
+        // });
+        // $(".helpfull").hover(function () {
+        //     $(".sol").show();
+        //     // $(".zi").hide();
+        // });
+
+        // $(".harmfull").mouseout(function () {
+        //     $(".zi").hide();
+        //     // $(".sol").hide();
+        // });
+        // $(".helpfull").mouseout(function () {
+        //     $(".sol").hide();
+        //     // $(".zi").hide();
+        // });
+    });
+
+    function myFunction() {
+        var video = document.getElementById("myVideo");
+        var btn = document.getElementById("myBtn");
+        if (video.paused) {
+            video.play();
+            btn.innerHTML = "Pause";
+        } else {
+            video.pause();
+            btn.innerHTML = "Play";
+        }
+    }
+</script>

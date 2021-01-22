@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vertex System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+
+    <style>
+        /* --------------------------------- */
+        .form-control {
+            border-radius: 0;
+            box-shadow: none;
+            border-color: #d2d6de
+        }
+
+        .select2-hidden-accessible {
+            border: 0 !important;
+            clip: rect(0 0 0 0) !important;
+            height: 1px !important;
+            margin: -1px !important;
+            overflow: hidden !important;
+            padding: 0 !important;
+            position: absolute !important;
+            width: 1px !important
+        }
+
+        .form-control {
+            display: block;
+            width: 100%;
+            height: 34px;
+            padding: 6px 12px;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #555;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+            -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+            -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s
+        }
+
+        .select2-container--default .select2-selection--single,
+        .select2-selection .select2-selection--single {
+            border: 1px solid #d2d6de;
+            border-radius: 0;
+            padding: 6px 12px;
+            height: 34px
+        }
+
+        .select2-container--default .select2-selection--single {
+            background-color: #fff;
+            border: 1px solid #aaa;
+            border-radius: 4px
+        }
+
+        .select2-container .select2-selection--single {
+            box-sizing: border-box;
+            cursor: pointer;
+            display: block;
+            height: 28px;
+            user-select: none;
+            -webkit-user-select: none
+        }
+
+        .select2-container .select2-selection--single .select2-selection__rendered {
+            padding-right: 10px
+        }
+
+        .select2-container .select2-selection--single .select2-selection__rendered {
+            padding-left: 0;
+            padding-right: 0;
+            height: auto;
+            margin-top: -3px
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            color: #444;
+            line-height: 28px
+        }
+
+        .select2-container--default .select2-selection--single,
+        .select2-selection .select2-selection--single {
+            border: 1px solid #d2d6de;
+            border-radius: 0 !important;
+            padding: 6px 12px;
+            height: 40px !important
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            height: 26px;
+            position: absolute;
+            top: 6px !important;
+            right: 1px;
+            width: 20px
+        }
+
+        /*----------------------------------*/
+        /* Optional: Style the caret down icon */
+        .fa-caret-down {
+            float: right;
+            padding-right: 8px;
+        }
+
+        .dropdown-btn:hover {
+            color: #f1f1f1;
+        }
+
+        .openbtn {
+            position: fixed;
+            left: -200px;
+            transition: 0.5s;
+        }
+
+        .openbtn:hover {
+            left: 0;
+        }
+
+        .sidenav {
+            height: 100%;
+            width: 200px;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            padding-top: 20px;
+        }
+
+        .dropdown-btn {
+            padding: 6px 8px 6px 16px;
+            margin-left: 10px;
+            text-decoration: none;
+            font-size: 17px;
+            color: #818181;
+            display: block;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .dropdown-container {
+            display: none;
+            background-color: #262626;
+            padding-left: 8px;
+        }
+
+        /* ------------------------ */
+        .sidepanel {
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            height: 200px;
+            top: 80px;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+        .sidepanel a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 15px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+        }
+
+        .sidepanel a:hover {
+            color: #f1f1f1;
+        }
+
+        .sidepanel .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+        }
+
+        .openbtn {
+            font-size: 20px;
+            cursor: pointer;
+            background-color: #111;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            padding-right: 50px;
+        }
+
+        .openbtn:hover {
+            background-color: #444;
+        }
+
+        /* ------------------------------ */
+        li>div>a:hover {
+            /* font-weight: bold; */
+            background-color: azure;
+            color: blue !important;
+        }
+
+        li>div>ul>li>a:hover {
+            font-weight: bold;
+            background-color: azure;
+            color: blue !important;
+        }
+
+        .nvs:hover {
+            font-size: 15px;
+            padding-bottom: 1%;
+            font-weight: bold;
+            color: blue !important;
+        }
+
+        .nvsHover:hover{
+            border-bottom: 2px solid red;
+        }
+        .nvsHover.active{
+            border-bottom: 2px solid red;
+        }
+
+        .headerSearch {
+            padding-right: 50% !important;
+            border-top: none !important;
+            background-color: #f8f9fa;
+            border-left: none !important;
+            border-right: none !important;
+        }
+
+        input {
+            outline: none !important;
+        }
+
+        @media (max-width: 1000px) {
+            #Searchtext {
+                display: inline-block;
+                width: 100%;
+                vertical-align: middle;
+                margin-right: .5rem !important;
+            }
+
+            #btnSubmit {
+                margin-top: 20px !important;
+            }
+        }
+
+        /* ------------------------------------------------ */
+
+        #myVideo {
+            position: static;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+        }
+
+        .contentabc {
+            position: absolute;
+            bottom: 8px;
+            color: #f1f1f1;
+            width: 100%;
+            padding: 20px;
+        }
+
+        #myBtn {
+            width: 200px;
+            font-size: 18px;
+            padding: 10px;
+            border: none;
+            background: #000;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        #myBtn:hover {
+            background: #ddd;
+            color: black;
+        }
+
+        /* ---------------------------------------------- */
+
+        .btnHover {
+            border-radius: 4px;
+            background-color: #f4511e;
+            border: none;
+            color: #FFFFFF;
+            text-align: center;
+            font-size: 20px;
+
+
+            transition: all 0.5s;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .btnHover span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+        }
+
+        .btnHover span:after {
+            content: '\00bb';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -20px;
+            transition: 0.5s;
+        }
+
+        .btnHover:hover span {
+            padding-right: 30px;
+        }
+
+        .btnHover:hover span:after {
+            opacity: 1;
+            right: 0;
+        }
+
+        /* ------------------------------------- */
+        .classificationVirus:hover {
+            box-shadow: #c5c7c9 0px 0px 8px 0px;
+            opacity: 65%;
+        }
+    </style>
+
+</head>
+
+<body>
+    <header>
+
+    </header>
+    <div class="container" style="padding-left: 0px;padding-right: 0px;">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="position: sticky !important;">
+            <a class="navbar-brand" href="home.html"><img src="images/logo_short-200x71.png" alt=""
+                    style="width: 70%;"></a>
+            <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse"
+                data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="collapsibleNavId" style="width: 100%;">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0" style="margin-right: 0px !important; width: 70%;">
+                    <li class="nav-item nvs nvsHover" style="padding-right: 2rem;">
+                        <a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item nvs nvsHover" style="padding-right: 2rem;">
+                        <a class="nav-link" href="aboutus.html">About us</a>
+                    </li>
+                    <li class="nav-item nvs nvsHover" style="padding-right: 2rem;">
+                        <a class="nav-link" href="typeOFVirus.html">Types of virus</a>
+                    </li>
+                    <li class="nav-item nvs active nvsHover" style="padding-right: 2rem;">
+                        <a class="nav-link" href="yearWiseListing.html">Year wise listing</a>
+                    </li>
+                    <li class="nav-item nvs nvsHover" style="padding-right: 2rem;">
+                        <a class="nav-link" href="contactus.html">Contact us</a>
+                    </li>
+                </ul>
+
+                <form class="form-inline my-2 my-lg-0 " style="flex-flow: nowrap !important;width: 30%;">
+                    <div class="input-group mb-3" style="margin-top: 10px; width: 100% !important;">
+
+                        <input id="headerSearch" type="text" class="form-control headerSearch" placeholder="Search">
+                        <div class="input-group-append">
+                            <span class="input-group-text" style="border: none !important;background-color: #f8f9fa;"><a
+                                    href=""><i class="fa fa-search" style="font-size: 20px;"></i></a></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </nav>
+    </div>
+
+    <section>
+        <div class="container">
+            <div class="contentMain">
+                <div class="row" style="background-color: #4f167c;margin-top: 1%;padding-left: 2%;color: white;">
+                    <div class="col-sm-3 col-md-3 col-lg-3">
+                        <h3 style="padding-top: 16px;">Year wise Listing</h3>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+
+                    </div>
+                    <div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 16px;">
+                        <div class="form-group"><select id="slcYear"
+                                class="form-control select2 select2-hidden-accessible" style="width: 100%;"
+                                tabindex="-1" aria-hidden="true">
+                                <option selected="selected" disabled>-- Select Year --</option>
+                                <option value="2021">2021</option>
+                                <option value="2020">2020</option>
+                                <option value="2019">2019</option>
+                                <option value="2018">2018</option>
+                                <option value="2017">2017</option>
+                                <option value="2016">2016</option>
+                                <option value="2015">2015</option>
+                                <option value="2014">2014</option>
+                                <option value="2013">2013</option>
+                                <option value="2012">2012</option>
+                                <option value="2011">2011</option>
+                                <option value="2010">2010</option>
+                            </select> </div>
+                    </div>
+                </div>
+                <hr>
+                <div id="fillterContent">
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container" style="background-color: #c5c7c9;color: #4b4e53;margin-top: 2%;">
+            <div class="row" style="padding: 4%;">
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <div class="row">
+                        <h5>CONTACT US</h5>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <h6 style="color: black;">Address</h6>
+                    </div>
+                    <div class="row">
+                        <h6>VERTEX SYSTEMS, INC. <br> 2550 Corporate Exchange Drive, Suite 104, <br>
+                            Columbus, OH 43231
+                        </h6>
+                    </div>
+
+                    <div class="row">
+                        <h6>VERTEX SYSTEMS, INC.
+                            <br>
+                            P.O. Box 430
+                            <br>
+                            Newark, OH 43058-0430
+                        </h6>
+                    </div>
+                    <div class="row">
+                        <H6 style="color: black;">Phone</H6>
+                    </div>
+                    <div class="row">
+                        <h6>Please contact us at <span style="color: red;">800–536–3427</span> to arrange.
+                        </h6>
+                    </div>
+                    <div class="row">
+                        <ul class="list-unstyled d-flex ">
+                            <li><a href="#" class="p-2"><span class="fa fa-twitter"
+                                        style="font-size:1.5rem; color:#4b4e53;"></span></a>
+                            </li>
+                            <li><a href="#" class="p-2"><span class="fa fa-facebook"
+                                        style="font-size:1.5rem;color:#4b4e53;"></span></a>
+                            </li>
+                            <li><a href="#" class="p-2"><span class="fa fa-linkedin"
+                                        style="font-size:1.5rem;color:#4b4e53;"></span></a>
+                            </li>
+                            <li><a href="#" class="p-2"><span class="fa fa-instagram"
+                                        style="font-size:1.5rem;color:#4b4e53;"></span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <div class="row">
+                        <h5>SITE MAP</h5>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <a href="">
+                            <h6 style="color: black;">Home</h6>
+                        </a>
+                    </div>
+                    <div class="row">
+                        <a href="">
+                            <h6 style="color: black;">About us</h6>
+                        </a>
+                    </div>
+                    <div class="row">
+                        <a href="">
+                            <h6 style="color: black;">Types Of Virus</h6>
+                        </a>
+                    </div>
+                    <div class="row">
+                        <a href="">
+                            <h6 style="color: black;">Year wise listing</h6>
+                        </a>
+                    </div>
+                    <div class="row">
+                        <a href="">
+                            <h6 style="color: black;">Contact</h6>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <div class="row">
+                        <h5>TYPES OF VIRUS</h5>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <h6 style="color: black;">DNA VIRUS</h6>
+                    </div>
+                    <div class="row">
+                        <h6 style="color: black;">RNA VIRUS</h6>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <div class="row">
+                        <h5>MAP</h5>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12203.997837115712!2d-82.35875477328804!3d40.12001552909294!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x883817e2ed9c6475%3A0xd4db3b9bf4a74ea7!2sNewark%2C%20Ohio%2043058%2C%20Hoa%20K%E1%BB%B3!5e0!3m2!1svi!2s!4v1610331668802!5m2!1svi!2s"
+                            width="100%" height="250" frameborder="0" style="border:0;" allowfullscreen=""
+                            aria-hidden="false" tabindex="0"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
+<script>
+    $('.select2').select2({
+        closeOnSelect: false
+    });
+    document.getElementById("slcYear").onchange = function (e) {
+        var yearSelect = document.getElementById("slcYear").value + "";
+        var data = [];
+        $.getJSON("js/data.json", function (items) {
+            data = items;
+            let search = yearSelect;
+            let re = new RegExp(search, "ig");
+            let subdata = data.filter(item => item.yearofappearance.search(re) >= 0);
+
+            displayFillterContent(subdata);
+        });
+    }
+
+    function displayFillterContent(items) {
+        let s = ``;
+
+        $.each(items, function (k, v) {
+            s += `<div class="row" style="margin-bottom: 15px;box-shadow: #c5c7c9 0px 0px 8px 0px;padding:15px">
+                        <div class="col-sm-3 col-md-3 col-lg-3">
+                            <div class="row">
+                                <img src="images/${v.imageDemo}" alt="" style="width: 100%;">
+                            </div>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-lg-9">
+                            <h3>${v.name}</h3>
+                            <p style="font-size: 16px;">
+                                ${v.description}
+                            </p>
+                            <a id="${v.id}" href="#" class="btn btn-primary btnHover" onclick="aClick(this.id)"><span>Read More</span></a>
+                        </div>
+                    </div>`;
+        });
+
+        $("#fillterContent").html(s);
+    }
+
+    function aClick(ID){
+        var url = 'LayoutVirusDetail.html';
+        var getIDVR = ID;
+        localStorage.setItem("storageName",getIDVR);
+        url = url + "?id=" + getIDVR;
+        window.open(url, '_blank');
+    }
+</script>

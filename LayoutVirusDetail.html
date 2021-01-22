@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vertex System</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <style>
+        /*-------------- */
+        .helpfull:hover {
+            color: #4f167c;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .harmfull:hover {
+            color: #4f167c;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /*-------------- */
+        .influencevs:hover {
+            color: blue;
+            background-color: #e6e7e9;
+        }
+
+        /* ------------- */
+        li>div>a:hover {
+            /* font-weight: bold; */
+            background-color: azure;
+            color: blue !important;
+        }
+
+        li>div>ul>li>a:hover {
+            font-weight: bold;
+            background-color: azure;
+            color: blue !important;
+        }
+
+        .nvs:hover {
+            font-size: 15px;
+            padding-bottom: 1%;
+            font-weight: bold;
+            color: blue !important;
+        }
+
+        .headerSearch {
+            padding-right: 50% !important;
+            border-top: none !important;
+            background-color: #f8f9fa;
+            border-left: none !important;
+            border-right: none !important;
+        }
+
+        input {
+            outline: none !important;
+        }
+
+        @media (max-width: 1000px) {
+            #Searchtext {
+                display: inline-block;
+                width: 100%;
+                vertical-align: middle;
+                margin-right: .5rem !important;
+            }
+
+            #btnSubmit {
+                margin-top: 20px !important;
+            }
+        }
+
+        /* ------------------------------------------------ */
+
+        #myVideo {
+            position: static;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+        }
+
+        .contentabc {
+            position: absolute;
+            bottom: 8px;
+            color: #f1f1f1;
+            width: 100%;
+            padding: 20px;
+        }
+
+        #myBtn {
+            width: 200px;
+            font-size: 18px;
+            padding: 10px;
+            border: none;
+            background: #000;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        #myBtn:hover {
+            background: #ddd;
+            color: black;
+        }
+
+        /* ---------------------------------------------- */
+
+        .btnHover {
+            border-radius: 4px;
+            background-color: #f4511e;
+            border: none;
+            color: #FFFFFF;
+            text-align: center;
+            font-size: 20px;
+
+
+            transition: all 0.5s;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .btnHover span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+        }
+
+        .btnHover span:after {
+            content: '\00bb';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -20px;
+            transition: 0.5s;
+        }
+
+        .btnHover:hover span {
+            padding-right: 30px;
+        }
+
+        .btnHover:hover span:after {
+            opacity: 1;
+            right: 0;
+        }
+
+        /* ------------------------------------- */
+        .classificationVirus:hover {
+            box-shadow: #5da6ee 0px 0px 8px 0px;
+            opacity: 65%;
+        }
+
+        /* Style the tab */
+        .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+        }
+
+        /* Style the buttons inside the tab */
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 28px;
+            transition: 0.3s;
+            font-size: 17px;
+        }
+
+        /* Change background color of buttons on hover */
+        .tab button:hover {
+            background-color: #ddd;
+        }
+
+        /* Create an active/current tablink class */
+        .tab button.active {
+            background-color: #ccc;
+        }
+
+        /* Style the tab content */
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+
+        .toptab:hover {
+            border-bottom: 3px solid red;
+        }
+
+        .toptab.active {
+            border-bottom: 3px solid red;
+        }
+
+        .carousel-inner img {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+
+</head>
+
+<body>
+    <header>
+
+    </header>
+    <div class="container" style="padding-left: 0px;padding-right: 0px;">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="position: sticky !important;">
+            <a class="navbar-brand" href="home.html"><img src="images/logo_short-200x71.png" alt=""
+                    style="width: 70%;"></a>
+            <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse"
+                data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="collapsibleNavId" style="width: 100%;">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0" style="margin-right: 0px !important; width: 70%;">
+                    <li class="nav-item nvs" style="padding-right: 2rem;">
+                        <a class="nav-link" href="home.html">Home<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item nvs" style="padding-right: 2rem;">
+                        <a class="nav-link" href="aboutus.html">About us</a>
+                    </li>
+                    <li class="nav-item nvs" style="padding-right: 2rem;">
+                        <a class="nav-link" href="typeOFVirus.html">Types of virus</a>
+                    </li>
+                    <li class="nav-item nvs" style="padding-right: 2rem;">
+                        <a class="nav-link" href="yearWiseListing.html">Year wise listing</a>
+                    </li>
+                    <li class="nav-item nvs" style="padding-right: 2rem;">
+                        <a class="nav-link" href="contactus.html">Contact us</a>
+                    </li>
+                </ul>
+
+                <form class="form-inline my-2 my-lg-0 " style="flex-flow: nowrap !important;width: 30%;">
+                    <div class="input-group mb-3" style="margin-top: 10px; width: 100% !important;">
+
+                        <input id="headerSearch" type="text" class="form-control headerSearch" placeholder="Search">
+                        <div class="input-group-append">
+                            <span class="input-group-text" style="border: none !important;background-color: #f8f9fa;"><a
+                                    href=""><i class="fa fa-search" style="font-size: 20px;"></i></a></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </nav>
+    </div>
+
+    <section>
+        <div class="container">
+            <div id="products">
+                <!-- <div class="row" style="margin-bottom: 4.5%;">
+                    <img src="images/virus" alt="" style="width: 100%;height: 500px;">
+                </div>
+                <div class="row">
+                    <h3 style="color: #4d95dd; position: absolute;bottom: 4.5%;background-color: white;
+                    padding-top: 5%;margin-left: 2%;padding-right: 25%;padding-left: 20px;padding-bottom: 3%;">
+                        Coronavirus
+                    </h3>
+                </div> -->
+                <!-- <div style="margin-left: 1%;margin-top: 5px;">
+                    <div class="tab">
+                        <button class="tablinks toptab" onclick="openCity(event, 'London')"
+                            style="font-weight: bold;color: #4d95dd;">Overview</button>
+                        <button class="tablinks toptab" onclick="openCity(event, 'Location')"
+                            style="font-weight: bold;color: #4d95dd;">Location of Origin</button>
+                        <button class="tablinks toptab" onclick="openCity(event, 'Paris')"
+                            style="font-weight: bold;color: #4d95dd;">Prevention</button>
+                        <button class="tablinks toptab" onclick="openCity(event, 'Tokyo')"
+                            style="font-weight: bold;color: #4d95dd;">Symptoms</button>
+                    </div>
+
+                    <div id="London" class="tabcontent">
+                        <div class="row">
+                            <div class="col-sm-7 col-md-7 col-lg-7">
+                                <p>
+                                    <br>
+                                    Hendra virus (HeV) infection is a rare emerging zoonosis (disease that can be transmitted to humans from animals) that causes severe and often fatal disease in both infected horses and humans. The natural host of the virus has been identified as being fruit bats of the Pteropodidae Family, Pteropus genus.
+                                    <br>
+                                    <br>
+                                    HeV was identified during the first recorded outbreak of the disease in the Brisbane suburb of Hendra, Australia, in 1994. The outbreak involved 21 stabled racehorses and two human cases. As of July 2016, 53 disease incidents involving over 70 horses have been reported. These incidents were all confined to the north-eastern coast of Australia. A total of seven humans have contracted Hendra virus from infected horses, particularly through close contact during care or necropsy of ill or dead horses
+                                </p>
+                            </div>
+                            <div class="col-sm-5 col-md-5 col-lg-5">
+                                <div id="accordion">
+                                    <div class="card">
+                                        <div class="card-header" id="headingOne" style="padding: 5px;">
+                                            <h5 class="mb-0">
+                                                <button class="btn btn-link" data-toggle="collapse"
+                                                    data-target="#collapseOne" aria-expanded="true"
+                                                    aria-controls="collapseOne">
+                                                    Images
+                                                </button>
+                                            </h5>
+                                        </div>
+
+                                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                            data-parent="#accordion">
+                                            <div class="card-body">
+                                                <div id="demo" class="carousel slide" data-ride="carousel">
+
+                                                    <ul class="carousel-indicators">
+                                                        <li data-target="#demo" data-slide-to="0" class="active"></li>
+                                                        <li data-target="#demo" data-slide-to="1"></li>
+                                                        <li data-target="#demo" data-slide-to="2"></li>
+                                                    </ul>
+
+                                                    <div class="carousel-inner">
+                                                        <div class="carousel-item active">
+                                                            <img src="images/corona_img_detail_1.jpg"
+                                                                alt="corona_img_detail_1" width="1100" height="500">
+                                                        </div>
+                                                        <div class="carousel-item">
+                                                            <img src="images/corona_img_detail_2.jpg"
+                                                                alt="corona_img_detail_2" width="1100" height="500">
+                                                        </div>
+                                                        <div class="carousel-item">
+                                                            <img src="images/corona_img_detail_3.jpg"
+                                                                alt="corona_img_detail_3" width="1100" height="500">
+                                                        </div>
+                                                    </div>
+
+                                                    <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                                                        <span class="carousel-control-prev-icon"></span>
+                                                    </a>
+                                                    <a class="carousel-control-next" href="#demo" data-slide="next">
+                                                        <span class="carousel-control-next-icon"></span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-header" id="headingTwo" style="padding: 5px;">
+                                            <h5 class="mb-0">
+                                                <button class="btn btn-link collapsed" data-toggle="collapse"
+                                                    data-target="#collapseTwo" aria-expanded="false"
+                                                    aria-controls="collapseTwo">
+                                                    Video
+                                                </button>
+                                            </h5>
+                                        </div>
+                                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                            data-parent="#accordion">
+                                            <div class="card-body">
+                                                <div style="position: relative;">
+                                                    <video autoplay muted loop id="myVideo" style="width: 100%;">
+                                                        <source src="media/videoDemoHome.mp4" type="video/mp4">
+                                                        Your browser does not support HTML5 video.
+                                                    </video>
+
+                                                    <div class="contentabc">
+                                                        <p>One of the dangerous virus groups currently 1 one of the
+                                                            dangerous viruses currently </p>
+                                                        <button id="myBtn" onclick="myFunction()">Pause</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Location" class="tabcontent">
+                        <div class="row">
+                            <div class="col-sm-7 col-md-7 col-lg-7">
+                                <p>
+                                    <br>
+                                    The Hendra virus (originally known as "Equine morbillivirus") was discovered in September 1994 when it caused the deaths of 13 horses, and a trainer at a training complex at 10 Williams Avenue, Hendra. , a suburb of Brisbane in Queensland, Australia.
+                                    <br>
+                                    <br>
+                                    The indicator box, a mare named Drama Series, was brought from a herd in Cannon Hill, and was raised with 19 other horses after falling ill and died two days later. After that, all the horses got sick, 13 died. The remaining six animals were subsequently amputated as a way to prevent the infection from recurring and the possibility of further transmission. The trainer, Victory ('Vic') Rail, and the stable foreman, Ray Unwin, were involved in nursing the index case, and both fell ill within a week of the first horse's death. . The steady hand recovered, but Rail died of respiratory and kidney failure. The source of the virus is most likely a bubbling nose from the index box.
+                                    <br>
+                                    <br>
+                                    A second outbreak occurred in August 1994 (chronologically before the first outbreak) in Mackay 1,000 km north of Brisbane, resulting in the deaths of two horses and their owners. The owner assisted in the slaughter of the horse, and within three weeks was admitted to hospital suffering from meningitis. He recovered, but 14 months later showed neurological signs and died. This outbreak was diagnosed retrospectively by the presence of the Hendra virus in the patient's brain.
+                                </p>
+                            </div>
+                            <div class="col-sm-5 col-md-5 col-lg-5">
+                                <div id="accordion">
+                                    <div class="card">
+                                        <div class="card-header" id="headingOne" style="padding: 5px;">
+                                            <h5 class="mb-0">
+                                                <button class="btn btn-link" data-toggle="collapse"
+                                                    data-target="#collapseOne" aria-expanded="true"
+                                                    aria-controls="collapseOne">
+                                                    Influence Images
+                                                </button>
+                                            </h5>
+                                        </div>
+
+                                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                            data-parent="#accordion">
+                                            <div class="card-body">
+                                                <div id="demo" class="carousel slide" data-ride="carousel">
+
+                                                    <ul class="carousel-indicators">
+                                                        <li data-target="#demo" data-slide-to="0" class="active"></li>
+                                                        <li data-target="#demo" data-slide-to="1"></li>
+                                                        <li data-target="#demo" data-slide-to="2"></li>
+                                                    </ul>
+
+                                                    <div class="carousel-inner">
+                                                        <div class="carousel-item active">
+                                                            <img src="images/corona_img_detail_1.jpg"
+                                                                alt="corona_img_detail_1" width="1100" height="500">
+                                                        </div>
+                                                        <div class="carousel-item">
+                                                            <img src="images/corona_img_detail_2.jpg"
+                                                                alt="corona_img_detail_2" width="1100" height="500">
+                                                        </div>
+                                                        <div class="carousel-item">
+                                                            <img src="images/corona_img_detail_3.jpg"
+                                                                alt="corona_img_detail_3" width="1100" height="500">
+                                                        </div>
+                                                    </div>
+
+                                                    <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                                                        <span class="carousel-control-prev-icon"></span>
+                                                    </a>
+                                                    <a class="carousel-control-next" href="#demo" data-slide="next">
+                                                        <span class="carousel-control-next-icon"></span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-header" id="headingTwo" style="padding: 5px;">
+                                            <h5 class="mb-0">
+                                                <button class="btn btn-link collapsed" data-toggle="collapse"
+                                                    data-target="#collapseTwo" aria-expanded="false"
+                                                    aria-controls="collapseTwo">
+                                                    The strongest spread area first
+                                                </button>
+                                            </h5>
+                                        </div>
+                                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                            data-parent="#accordion">
+                                            <div class="card-body col-sm-12 col-md-12 col-lg-12">
+                                                <div style="position: relative;">
+                                                    <iframe
+                                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d439721.42889498756!2d114.02018638427545!3d30.568407303624927!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x342eaef8dd85f26f%3A0x39c2c9ac6c582210!2zVsWpIEjDoW4sIEjhu5MgQuG6r2MsIFRydW5nIFF14buRYw!5e0!3m2!1svi!2s!4v1611222171954!5m2!1svi!2s"
+                                                        width="100%" height="450" frameborder="0" style="border:0;"
+                                                        allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="Paris" class="tabcontent">
+                        <div class="row">
+                            <div class="col-sm-7 col-md-7 col-lg-7">
+                                <p>
+                                    <br>
+                                    There is no specific treatment for human cases of Hendra virus. Intensive supportive care is provided, and the use of monoclonal antibodies is being investigated.
+                                    <br>
+                                    <br>
+                                    A registered Hendra animal vaccine exists and vaccination is recognised as an effective way to reduce the risk of horses becoming infected and to reduce the likelihood of human exposure.
+                                </p>
+                            </div>
+                            <div class="col-sm-5 col-md-5 col-lg-5">
+                                <div id="accordion">
+                                    <div class="card">
+                                        <div class="card-header" id="headingOne" style="padding: 5px;">
+                                            <h5 class="mb-0">
+                                                <button class="btn btn-link" data-toggle="collapse"
+                                                    data-target="#collapseOne" aria-expanded="true"
+                                                    aria-controls="collapseOne">
+                                                    Images
+                                                </button>
+                                            </h5>
+                                        </div>
+
+                                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                            data-parent="#accordion">
+                                            <div class="card-body">
+                                                <div id="demo" class="carousel slide" data-ride="carousel">
+
+                                                    <ul class="carousel-indicators">
+                                                        <li data-target="#demo" data-slide-to="0" class="active"></li>
+                                                        <li data-target="#demo" data-slide-to="1"></li>
+                                                        <li data-target="#demo" data-slide-to="2"></li>
+                                                    </ul>
+
+                                                    <div class="carousel-inner">
+                                                        <div class="carousel-item active">
+                                                            <img src="images/corona_img_detail_1.jpg"
+                                                                alt="corona_img_detail_1" width="1100" height="500">
+                                                        </div>
+                                                        <div class="carousel-item">
+                                                            <img src="images/corona_img_detail_2.jpg"
+                                                                alt="corona_img_detail_2" width="1100" height="500">
+                                                        </div>
+                                                        <div class="carousel-item">
+                                                            <img src="images/corona_img_detail_3.jpg"
+                                                                alt="corona_img_detail_3" width="1100" height="500">
+                                                        </div>
+                                                    </div>
+
+                                                    <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                                                        <span class="carousel-control-prev-icon"></span>
+                                                    </a>
+                                                    <a class="carousel-control-next" href="#demo" data-slide="next">
+                                                        <span class="carousel-control-next-icon"></span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-header" id="headingTwo" style="padding: 5px;">
+                                            <h5 class="mb-0">
+                                                <button class="btn btn-link collapsed" data-toggle="collapse"
+                                                    data-target="#collapseTwo" aria-expanded="false"
+                                                    aria-controls="collapseTwo">
+                                                    Video
+                                                </button>
+                                            </h5>
+                                        </div>
+                                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                            data-parent="#accordion">
+                                            <div class="card-body">
+                                                <div style="position: relative;">
+                                                    <video autoplay muted loop id="myVideo" style="width: 100%;">
+                                                        <source src="media/videoDemoHome.mp4" type="video/mp4">
+                                                        Your browser does not support HTML5 video.
+                                                    </video>
+
+                                                    <div class="contentabc">
+                                                        <p>One of the dangerous virus groups currently 1 one of the
+                                                            dangerous viruses currently </p>
+                                                        <button id="myBtn" onclick="myFunction()">Pause</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="Tokyo" class="tabcontent">
+                        <div class="row">
+                            <div class="col-sm-7 col-md-7 col-lg-7">
+                                <p>
+                                    <br>
+                                    Symptoms of Hendra virus infection in humans range from mild influenza-like illness to fatal respiratory or neurological disease.
+                                </p>
+                            </div>
+                            <div class="col-sm-5 col-md-5 col-lg-5">
+                                <div id="accordion">
+                                    <div class="card">
+                                        <div class="card-header" id="headingOne" style="padding: 5px;">
+                                            <h5 class="mb-0">
+                                                <button class="btn btn-link" data-toggle="collapse"
+                                                    data-target="#collapseOne" aria-expanded="true"
+                                                    aria-controls="collapseOne">
+                                                    Images
+                                                </button>
+                                            </h5>
+                                        </div>
+
+                                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                            data-parent="#accordion">
+                                            <div class="card-body">
+                                                <div id="demo" class="carousel slide" data-ride="carousel">
+
+                                                    <ul class="carousel-indicators">
+                                                        <li data-target="#demo" data-slide-to="0" class="active"></li>
+                                                        <li data-target="#demo" data-slide-to="1"></li>
+                                                        <li data-target="#demo" data-slide-to="2"></li>
+                                                    </ul>
+
+                                                    <div class="carousel-inner">
+                                                        <div class="carousel-item active">
+                                                            <img src="images/corona_img_detail_1.jpg"
+                                                                alt="corona_img_detail_1" width="1100" height="500">
+                                                        </div>
+                                                        <div class="carousel-item">
+                                                            <img src="images/corona_img_detail_2.jpg"
+                                                                alt="corona_img_detail_2" width="1100" height="500">
+                                                        </div>
+                                                        <div class="carousel-item">
+                                                            <img src="images/corona_img_detail_3.jpg"
+                                                                alt="corona_img_detail_3" width="1100" height="500">
+                                                        </div>
+                                                    </div>
+
+                                                    <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                                                        <span class="carousel-control-prev-icon"></span>
+                                                    </a>
+                                                    <a class="carousel-control-next" href="#demo" data-slide="next">
+                                                        <span class="carousel-control-next-icon"></span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-header" id="headingTwo" style="padding: 5px;">
+                                            <h5 class="mb-0">
+                                                <button class="btn btn-link collapsed" data-toggle="collapse"
+                                                    data-target="#collapseTwo" aria-expanded="false"
+                                                    aria-controls="collapseTwo">
+                                                    Video
+                                                </button>
+                                            </h5>
+                                        </div>
+                                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                            data-parent="#accordion">
+                                            <div class="card-body">
+                                                <div style="position: relative;">
+                                                    <video autoplay muted loop id="myVideo" style="width: 100%;">
+                                                        <source src="media/videoDemoHome.mp4" type="video/mp4">
+                                                        Your browser does not support HTML5 video.
+                                                    </video>
+
+                                                    <div class="contentabc">
+                                                        <p>One of the dangerous virus groups currently 1 one of the
+                                                            dangerous viruses currently </p>
+                                                        <button id="myBtn" onclick="myFunction()">Pause</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+    </section>
+
+    <footer>
+        <div class="container" style="background-color: #c5c7c9;color: #4b4e53;margin-top: 2%;">
+            <div class="row" style="padding: 4%;">
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <div class="row">
+                        <h5>CONTACT US</h5>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <h6 style="color: black;">Address</h6>
+                    </div>
+                    <div class="row">
+                        <h6>VERTEX SYSTEMS, INC. <br> 2550 Corporate Exchange Drive, Suite 104, <br>
+                            Columbus, OH 43231
+                        </h6>
+                    </div>
+
+                    <div class="row">
+                        <h6>VERTEX SYSTEMS, INC.
+                            <br>
+                            P.O. Box 430
+                            <br>
+                            Newark, OH 43058-0430
+                        </h6>
+                    </div>
+                    <div class="row">
+                        <H6 style="color: black;">Phone</H6>
+                    </div>
+                    <div class="row">
+                        <h6>Please contact us at <span style="color: red;">800–536–3427</span> to arrange.
+                        </h6>
+                    </div>
+                    <div class="row">
+                        <ul class="list-unstyled d-flex ">
+                            <li><a href="#" class="p-2"><span class="fa fa-twitter"
+                                        style="font-size:1.5rem; color:#4b4e53;"></span></a>
+                            </li>
+                            <li><a href="#" class="p-2"><span class="fa fa-facebook"
+                                        style="font-size:1.5rem;color:#4b4e53;"></span></a>
+                            </li>
+                            <li><a href="#" class="p-2"><span class="fa fa-linkedin"
+                                        style="font-size:1.5rem;color:#4b4e53;"></span></a>
+                            </li>
+                            <li><a href="#" class="p-2"><span class="fa fa-instagram"
+                                        style="font-size:1.5rem;color:#4b4e53;"></span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <div class="row">
+                        <h5>SITE MAP</h5>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <a href="">
+                            <h6 style="color: black;">Home</h6>
+                        </a>
+                    </div>
+                    <div class="row">
+                        <a href="">
+                            <h6 style="color: black;">About us</h6>
+                        </a>
+                    </div>
+                    <div class="row">
+                        <a href="">
+                            <h6 style="color: black;">Types Of Virus</h6>
+                        </a>
+                    </div>
+                    <div class="row">
+                        <a href="">
+                            <h6 style="color: black;">Year wise listing</h6>
+                        </a>
+                    </div>
+                    <div class="row">
+                        <a href="">
+                            <h6 style="color: black;">Contact</h6>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <div class="row">
+                        <h5>TYPES OF VIRUS</h5>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <h6 style="color: black;">DNA VIRUS</h6>
+                    </div>
+                    <div class="row">
+                        <h6 style="color: black;">RNA VIRUS</h6>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <div class="row">
+                        <h5>MAP</h5>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12203.997837115712!2d-82.35875477328804!3d40.12001552909294!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x883817e2ed9c6475%3A0xd4db3b9bf4a74ea7!2sNewark%2C%20Ohio%2043058%2C%20Hoa%20K%E1%BB%B3!5e0!3m2!1svi!2s!4v1610331668802!5m2!1svi!2s"
+                            width="100%" height="250" frameborder="0" style="border:0;" allowfullscreen=""
+                            aria-hidden="false" tabindex="0"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
+<script>
+    /* viết script thay đổi thuộc tính width input search khi co ngắn màn hình console lại */
+
+    $(document).ready(function (e) {
+        $(".zi").hide();
+        $(".sol").hide();
+        $(".harmfull").click(function () {
+            $(".zi").show();
+            // $(".sol").hide();
+        });
+        $(".helpfull").click(function () {
+            $(".sol").show();
+            // $(".zi").hide();
+        });
+
+        var IDVRus = localStorage.getItem("storageName");
+        var data = [];
+        $.getJSON("js/data.json", function (items) {
+            data = items;
+            let search = IDVRus;
+            let re = new RegExp(search, "ig");
+            let subdata = data.filter(item => item.id.search(re) >= 0);
+
+            displayImages(subdata);
+        });
+    });
+
+    function myFunction() {
+        var video = document.getElementById("myVideoOverview");
+        var btn = document.getElementById("myBtnOverview");
+        if (video.paused) {
+            video.play();
+            btn.innerHTML = "Pause";
+        } else {
+            video.pause();
+            btn.innerHTML = "Play";
+        }
+    }
+
+    function myFunctionPrevention() {
+        var video = document.getElementById("myVideoPrevention");
+        var btn = document.getElementById("myBtnPrevention");
+        if (video.paused) {
+            video.play();
+            btn.innerHTML = "Pause";
+        } else {
+            video.pause();
+            btn.innerHTML = "Play";
+        }
+    }
+
+    function myFunctionSysptoms() {
+        var video = document.getElementById("myVideoSysptoms");
+        var btn = document.getElementById("myBtnSysptoms");
+        if (video.paused) {
+            video.play();
+            btn.innerHTML = "Pause";
+        } else {
+            video.pause();
+            btn.innerHTML = "Play";
+        }
+    }
+
+    function openCity(evt, cityName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+    function displayImages(items) {
+        let s = ``;
+
+        $.each(items, function (k, v) {
+
+            s += `<div class="row" style="margin-bottom: 4.5%;">
+                <img src="images/${v.imageDemo}" alt="" style="width: 100%;height: 500px;">
+            </div>
+            <div class="row" style="position: relative;">
+                <h3 style="color: #4d95dd; position: absolute;bottom: 4.5%;background-color: white;
+                padding-top: 6%;margin-left: 2%;padding-right: 25%;padding-left: 20px;padding-bottom: 4%;">${v.name}
+                </h3>
+            </div>
+            <div style="margin-left: 1%;margin-top: 5px;">
+                <div class="tab">
+                    <button class="tablinks toptab" onclick="openCity(event, 'London')"
+                        style="font-weight: bold;color: #4d95dd;">Overview</button>
+                    <button class="tablinks toptab" onclick="openCity(event, 'Location')"
+                        style="font-weight: bold;color: #4d95dd;">Location of Origin</button>
+                    <button class="tablinks toptab" onclick="openCity(event, 'Paris')"
+                        style="font-weight: bold;color: #4d95dd;">Prevention</button>
+                    <button class="tablinks toptab" onclick="openCity(event, 'Tokyo')"
+                        style="font-weight: bold;color: #4d95dd;">Symptoms</button>
+                </div>
+                
+                <div id="London" class="tabcontent">
+                    <div class="row">
+                        <div class="col-sm-7 col-md-7 col-lg-7">
+                            <p>
+                                ${v.overview}
+                            </p>
+                        </div>
+                        <div class="col-sm-5 col-md-5 col-lg-5">
+                            <div id="accordion">
+                                <div class="card">
+                                    <div class="card-header" id="headingOne" style="padding: 5px;">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link" data-toggle="collapse"
+                                                data-target="#collapseOne" aria-expanded="true"
+                                                aria-controls="collapseOne">
+                                                Images
+                                            </button>
+                                        </h5>
+                                    </div>
+
+                                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                        data-parent="#accordion">
+                                        <div class="card-body">
+                                            <div id="demo" class="carousel slide" data-ride="carousel">
+
+                                                <!-- Indicators -->
+                                                <ul class="carousel-indicators">
+                                                    <li data-target="#demo" data-slide-to="0" class="active"></li>
+                                                    <li data-target="#demo" data-slide-to="1"></li>
+                                                    <li data-target="#demo" data-slide-to="2"></li>
+                                                </ul>
+
+                                                <!-- The slideshow -->
+                                                <div class="carousel-inner">
+                                                    <div class="carousel-item active">
+                                                        <img src="images/${v.imageOverview1}"
+                                                            alt="corona_img_detail_1" width="1100" height="500">
+                                                    </div>
+                                                    <div class="carousel-item">
+                                                        <img src="images/${v.imageOverview2}"
+                                                            alt="corona_img_detail_2" width="1100" height="500">
+                                                    </div>
+                                                    <div class="carousel-item">
+                                                        <img src="images/${v.imageOverview3}"
+                                                            alt="corona_img_detail_3" width="1100" height="500">
+                                                    </div>
+                                                </div>
+
+                                                <!-- Left and right controls -->
+                                                <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                                                    <span class="carousel-control-prev-icon"></span>
+                                                </a>
+                                                <a class="carousel-control-next" href="#demo" data-slide="next">
+                                                    <span class="carousel-control-next-icon"></span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header" id="headingTwo" style="padding: 5px;">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link collapsed" data-toggle="collapse"
+                                                data-target="#collapseTwo" aria-expanded="false"
+                                                aria-controls="collapseTwo">
+                                                Video
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                        data-parent="#accordion">
+                                        <div class="card-body">
+                                            <div style="position: relative;">
+                                                <video autoplay muted loop id="myVideoOverview" style="width: 100%;">
+                                                    <source src="media/${v.videoOverview}" type="video/mp4">
+                                                    Your browser does not support HTML5 video.
+                                                </video>
+
+                                                <div class="contentabc">
+                                                    <p>One of the dangerous virus groups currently 1 one of the
+                                                        dangerous viruses currently </p>
+                                                    <button id="myBtnOverview" onclick="myFunction()">Pause</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="Location" class="tabcontent">
+                    <div class="row">
+                        <div class="col-sm-7 col-md-7 col-lg-7">
+                            <p>
+                                ${v.location}
+                            </p>
+                        </div>
+                        <div class="col-sm-5 col-md-5 col-lg-5">
+                            <div id="accordion">
+                                <div class="card">
+                                    <div class="card-header" id="headingOne" style="padding: 5px;">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link" data-toggle="collapse"
+                                                data-target="#collapseOne" aria-expanded="true"
+                                                aria-controls="collapseOne">
+                                                Influence
+                                            </button>
+                                        </h5>
+                                    </div>
+
+                                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                        data-parent="#accordion">
+                                        <div class="card-body">
+                                            <div id="demo1" class="carousel slide" data-ride="carousel">
+
+                                                <!-- Indicators -->
+                                                <ul class="carousel-indicators">
+                                                    <li data-target="#demo1" data-slide-to="0" class="active"></li>
+                                                    <li data-target="#demo1" data-slide-to="1"></li>
+                                                    <li data-target="#demo1" data-slide-to="2"></li>
+                                                </ul>
+
+                                                <!-- The slideshow -->
+                                                <div class="carousel-inner">
+                                                    <div class="carousel-item active">
+                                                        <img src="images/${v.imageLocation1}"
+                                                            alt="corona_img_detail_1" width="1100" height="500">
+                                                    </div>
+                                                    <div class="carousel-item">
+                                                        <img src="images/${v.imageLocation2}"
+                                                            alt="corona_img_detail_2" width="1100" height="500">
+                                                    </div>
+                                                    <div class="carousel-item">
+                                                        <img src="images/${v.imageLocation3}"
+                                                            alt="corona_img_detail_3" width="1100" height="500">
+                                                    </div>
+                                                </div>
+
+                                                <!-- Left and right controls -->
+                                                <a class="carousel-control-prev" href="#demo1" data-slide="prev">
+                                                    <span class="carousel-control-prev-icon"></span>
+                                                </a>
+                                                <a class="carousel-control-next" href="#demo1" data-slide="next">
+                                                    <span class="carousel-control-next-icon"></span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header" id="headingTwo" style="padding: 5px;">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link collapsed" data-toggle="collapse"
+                                                data-target="#collapseTwo" aria-expanded="false"
+                                                aria-controls="collapseTwo">
+                                                Map
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                        data-parent="#accordion">
+                                        <div class="card-body">
+                                            <div style="position: relative;">
+                                                <iframe
+                                                        src="${v.iframeURL}"
+                                                        width="100%" height="450" frameborder="0" style="border:0;"
+                                                        allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="Paris" class="tabcontent">
+                    <div class="row">
+                            <div class="col-sm-7 col-md-7 col-lg-7">
+                                ${v.prevention}
+                            </div>
+                            <div class="col-sm-5 col-md-5 col-lg-5">
+                                <div id="accordion">
+                                    <div class="card">
+                                        <div class="card-header" id="headingOne" style="padding: 5px;">
+                                            <h5 class="mb-0">
+                                                <button class="btn btn-link" data-toggle="collapse"
+                                                    data-target="#collapseOne" aria-expanded="true"
+                                                    aria-controls="collapseOne">
+                                                    Images
+                                                </button>
+                                            </h5>
+                                        </div>
+    
+                                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                            data-parent="#accordion">
+                                            <div class="card-body">
+                                                <div id="demo2" class="carousel slide" data-ride="carousel">
+    
+                                                    <ul class="carousel-indicators">
+                                                        <li data-target="#demo2" data-slide-to="0" class="active"></li>
+                                                        <li data-target="#demo2" data-slide-to="1"></li>
+                                                        <li data-target="#demo2" data-slide-to="2"></li>
+                                                    </ul>
+    
+                                                    <div class="carousel-inner">
+                                                        <div class="carousel-item active">
+                                                            <img src="images/${v.imagePrevention1}"
+                                                                alt="corona_img_detail_1" width="1100" height="500">
+                                                        </div>
+                                                        <div class="carousel-item">
+                                                            <img src="images/${v.imagePrevention2}"
+                                                                alt="corona_img_detail_2" width="1100" height="500">
+                                                        </div>
+                                                        <div class="carousel-item">
+                                                            <img src="images/${v.imagePrevention3}"
+                                                                alt="corona_img_detail_3" width="1100" height="500">
+                                                        </div>
+                                                    </div>
+    
+                                                    <a class="carousel-control-prev" href="#demo2" data-slide="prev">
+                                                        <span class="carousel-control-prev-icon"></span>
+                                                    </a>
+                                                    <a class="carousel-control-next" href="#demo2" data-slide="next">
+                                                        <span class="carousel-control-next-icon"></span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-header" id="headingTwo" style="padding: 5px;">
+                                            <h5 class="mb-0">
+                                                <button class="btn btn-link collapsed" data-toggle="collapse"
+                                                    data-target="#collapseTwo" aria-expanded="false"
+                                                    aria-controls="collapseTwo">
+                                                    Video
+                                                </button>
+                                            </h5>
+                                        </div>
+                                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                            data-parent="#accordion">
+                                            <div class="card-body">
+                                                <div style="position: relative;">
+                                                    <video autoplay muted loop id="myVideoPrevention" style="width: 100%;">
+                                                        <source src="media/${v.videoPrevention}" type="video/mp4">
+                                                        Your browser does not support HTML5 video.
+                                                    </video>
+    
+                                                    <div class="contentabc">
+                                                        <p>One of the dangerous virus groups currently 1 one of the
+                                                            dangerous viruses currently </p>
+                                                        <button id="myBtnPrevention" onclick="myFunctionPrevention()">Pause</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+
+                <div id="Tokyo" class="tabcontent">
+                    <div class="row">
+                        <div class="col-sm-7 col-md-7 col-lg-7">
+                            <p>
+                                ${v.symptoms}
+                            </p>
+                        </div>
+                        <div class="col-sm-5 col-md-5 col-lg-5">
+                            <div id="accordion">
+                                <div class="card">
+                                    <div class="card-header" id="headingOne" style="padding: 5px;">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link" data-toggle="collapse"
+                                                data-target="#collapseOne" aria-expanded="true"
+                                                aria-controls="collapseOne">
+                                                Images
+                                            </button>
+                                        </h5>
+                                    </div>
+
+                                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                        data-parent="#accordion">
+                                        <div class="card-body">
+                                            <div id="demo3" class="carousel slide" data-ride="carousel">
+
+                                                <!-- Indicators -->
+                                                <ul class="carousel-indicators">
+                                                    <li data-target="#demo3" data-slide-to="0" class="active"></li>
+                                                    <li data-target="#demo3" data-slide-to="1"></li>
+                                                    <li data-target="#demo3" data-slide-to="2"></li>
+                                                </ul>
+
+                                                <!-- The slideshow -->
+                                                <div class="carousel-inner">
+                                                    <div class="carousel-item active">
+                                                        <img src="images/${v.imageSysptoms1}"
+                                                            alt="corona_img_detail_1" width="1100" height="500">
+                                                    </div>
+                                                    <div class="carousel-item">
+                                                        <img src="images/${v.imageSysptoms2}"
+                                                            alt="corona_img_detail_2" width="1100" height="500">
+                                                    </div>
+                                                    <div class="carousel-item">
+                                                        <img src="images/${v.imageSysptoms3}"
+                                                            alt="corona_img_detail_3" width="1100" height="500">
+                                                    </div>
+                                                </div>
+
+                                                <!-- Left and right controls -->
+                                                <a class="carousel-control-prev" href="#demo3" data-slide="prev">
+                                                    <span class="carousel-control-prev-icon"></span>
+                                                </a>
+                                                <a class="carousel-control-next" href="#demo3" data-slide="next">
+                                                    <span class="carousel-control-next-icon"></span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header" id="headingTwo" style="padding: 5px;">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link collapsed" data-toggle="collapse"
+                                                data-target="#collapseTwo" aria-expanded="false"
+                                                aria-controls="collapseTwo">
+                                                Video
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                        data-parent="#accordion">
+                                        <div class="card-body">
+                                            <div style="position: relative;">
+                                                <video autoplay muted loop id="myVideoSysptoms" style="width: 100%;">
+                                                    <source src="media/${v.videoSysptoms}" type="video/mp4">
+                                                    Your browser does not support HTML5 video.
+                                                </video>
+
+                                                <div class="contentabc">
+                                                    <p>One of the dangerous virus groups currently 1 one of the
+                                                        dangerous viruses currently </p>
+                                                    <button id="myBtnSysptoms" onclick="myFunctionSysptoms()">Pause</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+
+        });
+
+        $("#products").html(s);
+    }
+</script>

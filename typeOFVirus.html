@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vertex System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        /*----------------------------------*/
+        /* Optional: Style the caret down icon */
+        .fa-caret-down {
+            float: right;
+            padding-right: 8px;
+        }
+
+        .dropdown-btn:hover {
+            color: #f1f1f1;
+        }
+
+        .openbtn {
+            position: fixed;
+            left: -200px;
+            transition: 0.5s;
+        }
+
+        .openbtn:hover {
+            left: 0;
+        }
+
+        .sidenav {
+            height: 100%;
+            width: 200px;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            padding-top: 20px;
+        }
+
+        .dropdown-btn {
+            padding: 6px 8px 6px 16px;
+            margin-left: 10px;
+            text-decoration: none;
+            font-size: 17px;
+            color: #818181;
+            display: block;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .dropdown-container {
+            display: none;
+            background-color: #262626;
+            padding-left: 8px;
+        }
+
+        /* ------------------------ */
+        .sidepanel {
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            height: 200px;
+            top: 80px;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+        .sidepanel a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 15px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+        }
+
+        .sidepanel a:hover {
+            color: #f1f1f1;
+        }
+
+        .sidepanel .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+        }
+
+        .openbtn {
+            font-size: 20px;
+            cursor: pointer;
+            background-color: #111;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            padding-right: 50px;
+        }
+
+        .openbtn:hover {
+            background-color: #444;
+        }
+
+        /* ------------------------------ */
+        li>div>a:hover {
+            /* font-weight: bold; */
+            background-color: azure;
+            color: blue !important;
+        }
+
+        li>div>ul>li>a:hover {
+            font-weight: bold;
+            background-color: azure;
+            color: blue !important;
+        }
+
+        .nvs:hover {
+            font-size: 15px;
+            padding-bottom: 1%;
+            font-weight: bold;
+            color: blue !important;
+        }
+
+        .nvsHover:hover{
+            border-bottom: 2px solid red;
+        }
+        .nvsHover.active{
+            border-bottom: 2px solid red;
+        }
+
+        .headerSearch {
+            padding-right: 50% !important;
+            border-top: none !important;
+            background-color: #f8f9fa;
+            border-left: none !important;
+            border-right: none !important;
+        }
+
+        input {
+            outline: none !important;
+        }
+
+        @media (max-width: 1000px) {
+            #Searchtext {
+                display: inline-block;
+                width: 100%;
+                vertical-align: middle;
+                margin-right: .5rem !important;
+            }
+
+            #btnSubmit {
+                margin-top: 20px !important;
+            }
+        }
+
+        /* ------------------------------------------------ */
+
+        #myVideo {
+            position: static;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+        }
+
+        .contentabc {
+            position: absolute;
+            bottom: 8px;
+            color: #f1f1f1;
+            width: 100%;
+            padding: 20px;
+        }
+
+        #myBtn {
+            width: 200px;
+            font-size: 18px;
+            padding: 10px;
+            border: none;
+            background: #000;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        #myBtn:hover {
+            background: #ddd;
+            color: black;
+        }
+
+        /* ---------------------------------------------- */
+
+        .btnHover {
+            border-radius: 4px;
+            background-color: #f4511e;
+            border: none;
+            color: #FFFFFF;
+            text-align: center;
+            font-size: 20px;
+
+
+            transition: all 0.5s;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .btnHover span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+        }
+
+        .btnHover span:after {
+            content: '\00bb';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -20px;
+            transition: 0.5s;
+        }
+
+        .btnHover:hover span {
+            padding-right: 30px;
+        }
+
+        .btnHover:hover span:after {
+            opacity: 1;
+            right: 0;
+        }
+
+        /* ------------------------------------- */
+        .classificationVirus:hover {
+            box-shadow: #c5c7c9 0px 0px 8px 0px;
+            opacity: 65%;
+        }
+    </style>
+
+</head>
+
+<body>
+    <header>
+
+    </header>
+    <div class="container" style="padding-left: 0px;padding-right: 0px;">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="position: sticky !important;">
+            <a class="navbar-brand" href="home.html"><img src="images/logo_short-200x71.png" alt=""
+                    style="width: 70%;"></a>
+            <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse"
+                data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="collapsibleNavId" style="width: 100%;">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0" style="margin-right: 0px !important; width: 70%;">
+                    <li class="nav-item nvs nvsHover" style="padding-right: 2rem;">
+                        <a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item nvs nvsHover" style="padding-right: 2rem;">
+                        <a class="nav-link" href="aboutus.html">About us</a>
+                    </li>
+                    <li class="nav-item active nvs nvsHover" style="padding-right: 2rem;">
+                        <a class="nav-link" href="typeOFVirus.html">Types of virus</a>
+                    </li>
+                    <li class="nav-item nvs nvsHover" style="padding-right: 2rem;">
+                        <a class="nav-link" href="yearWiseListing.html">Year wise listing</a>
+                    </li>
+                    <li class="nav-item nvs nvsHover" style="padding-right: 2rem;">
+                        <a class="nav-link" href="contactus.html">Contact us</a>
+                    </li>
+                </ul>
+
+                <form class="form-inline my-2 my-lg-0 " style="flex-flow: nowrap !important;width: 30%;">
+                    <div class="input-group mb-3" style="margin-top: 10px; width: 100% !important;">
+
+                        <input id="headerSearch" type="text" class="form-control headerSearch" placeholder="Search">
+                        <div class="input-group-append">
+                            <span class="input-group-text" style="border: none !important;background-color: #f8f9fa;"><a
+                                    href=""><i class="fa fa-search" style="font-size: 20px;"></i></a></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </nav>
+    </div>
+
+    <section>
+        <div class="container">
+            <div class="contentMain">
+                <div id="mySidepanel" class="sidepanel row" style="display: block;width: 300px;">
+                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+                    <!-- <h4>THE HOT RANGE</h4> -->
+                    <button class="dropdown-btn">DNA viruses
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-container">
+                        <a id="VR05" href="#" onclick="aClick(this.id)">1. HIV/AIDS</a>
+                    </div>
+                    <button class="dropdown-btn">RNA viruses
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-container">
+                        <a id="VR06" href="#" onclick="aClick(this.id)">2. Hendraviruses</a>
+                        <a id="VR04" href="#" onclick="aClick(this.id)">3. Marburgviruses</a>
+                        <a id="VR03" href="#" onclick="aClick(this.id)">4. Nipahviruses</a>
+                        <a id="VR01" href="#" onclick="aClick(this.id)">5. Coronaviruses</a>
+                        <a id="VR02" href="#" onclick="aClick(this.id)">6. Ebolaviruses</a>
+                    </div>
+                </div>
+
+                <button class="openbtn" onclick="openNav()">☰ Include Two Types</button>
+
+                <div class="row" style="background-color: #4f167c;margin-top: 1%;padding-left: 2%;color: white;">
+                    <h3>Virus Classification</h3>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3 col-md-3 col-lg-3" style="padding-left: 0px;padding-right: 0px;">
+                        <img src="images/imagesPhanLoaiDemo.png" alt="" style="width: 100%;height: 300px;">
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 2%;">
+                    <h3 style="color: #813588;">How are viruses classified?</h3>
+                </div>
+                <div class="row">
+                    <p style="color:#4b4e53;font-size: 17px;">
+                        In part by their shape. This picture represents a bacteriophage, a virus that infects bacteria.
+                        Notice the distinctive shape. This virus has a complex shape.
+                    </p>
+                </div>
+                <div class="row">
+                    <h3 style="color: #813588;">Classification of Viruses</h3>
+                </div>
+                <div class="row">
+                    <p style="color:#4b4e53;font-size: 17px;">
+                        Viruses can be classified primarily on their phenotypic characteristics, core content, chemical
+                        composition, capsid structure, size, shape, genome structure and modes of replication.
+                        <br>
+                        The Baltimore classification is the most commonly used for studying the system of virus
+                        classification. This system was developed by an American biologist David Baltimore in the 1970s,
+                        for which he was awarded the Nobel Prize.
+                    </p>
+                </div>
+                <div class="row" style="color: white;background-color: #4f167c;padding-left: 2%;">
+                    <h3>Since then, Viruses are classified based on the following 5 classifications:</h3>
+                </div>
+                <div class="container" style="margin-top: 2%;">
+                    <div class="row">
+                        <h5 style="color: #813588;">Based on the presence of nucleic acid</h5>
+                    </div>
+                    <p style="margin-bottom: 8px; font-weight: bold;">
+                        1. DNA virus
+                    </p>
+                    <p style="margin-bottom: 8px;">
+                        The virus, having DNA as its genetic material. There are two different types of DNA virus
+                    </p>
+                    <p style="margin-bottom: 8px;">
+                        Single-stranded (ss) DNA virus: e.g. Picornaviruses, Parvovirus, etc.
+                    </p>
+                    <p style="margin-bottom: 8px;">
+                        Double-stranded (ds) DNA virus: e.g. Adenovirus, Herpes virus, etc.
+                    </p>
+                    <p style="margin-bottom: 8px; font-weight: bold;">
+                        2. RNA virus
+                    </p>
+                    <p style="margin-bottom: 8px;">
+                        The virus, having RNA as its genetic material. There are two different types of RNA virus
+                    </p>
+                    <p style="margin-bottom: 8px;">
+                        Double-stranded (ds) RNA virus: e.g. Reovirus, etc.
+                    </p>
+                    <p style="margin-bottom: 8px;">
+                        Single-stranded (ss) RNA virus. It is further classified into two Positive sense RNA (+RNA) and
+                        negative sense RNA (-RNA). Poliovirus, Hepatitis A, Rabies virus, Influenza virus are examples
+                        of single-stranded RNA virus.
+                    </p>
+                    <div class="row">
+                        <h5 style="color: #813588;">Based on the structure or symmetry</h5>
+                    </div>
+                    <p style="margin-bottom: 8px;font-weight: bold;">
+                        1. Complex virus. E.g Poxvirus
+                    </p>
+                    <p style="margin-bottom: 8px;font-weight: bold;">
+                        2. Radial symmetry virus. E.g.Bacteriophage
+                    </p>
+                    <p style="margin-bottom: 8px;font-weight: bold;">
+                        3. Cubical or icosahedral symmetry shaped virus. E.g. Reovirus, Picornavirus
+                    </p>
+                    <p style="margin-bottom: 8px;font-weight: bold;">
+                        4. Rod or Spiral shaped or helical symmetry virus.E.g. Paramyxovirus, orthomyxovirus
+                    </p>
+                    <div class="row">
+                        <h5 style="color: #813588;">Based on the replication properties and site of replication</h5>
+                    </div>
+                    <p style="margin-bottom: 8px;">
+                        Here, viruses invade into the host cell, where it replicates and assembly within the cell
+                        organelles.
+                    </p>
+                    <p style="margin-bottom: 8px;font-weight: bold;">
+                        1. Replication within the cytoplasm of the host cell.
+                    </p>
+                    <p style="margin-bottom: 8px;">
+                        E.g. All RNA viruses except the Influenza virus.
+                    </p>
+                    <p style="margin-bottom: 8px;font-weight: bold;">
+                        2. Replication within the nucleus and the cytoplasm of the host cell.
+                    </p>
+                    <p style="margin-bottom: 8px;">
+                        E.g. Influenza virus, Poxvirus, etc.
+                    </p>
+                    <p style="margin-bottom: 8px;font-weight: bold;">
+                        3. Replication within the nucleus of the host cell.
+                    </p>
+                    <p style="margin-bottom: 8px;">
+                        E.g. Influenza virus, Poxvirus, etc.
+                    </p>
+                    <p style="margin-bottom: 8px;font-weight: bold;">
+                        4. Replication of the virus through the double-stranded DNA intermediate.
+                    </p>
+                    <p style="margin-bottom: 8px;">
+                        E.g. Influenza virus, Poxvirus, etc.
+                    </p>
+                    <p style="margin-bottom: 8px;font-weight: bold;">
+                        5. Replication of the virus through a single-stranded RNA intermediate.
+                    </p>
+                    <p style="margin-bottom: 8px;">
+                        E.g. Influenza virus, Poxvirus, etc.
+                    </p>
+                    <div class="row">
+                        <h5 style="color: #813588;">Based on the host range</h5>
+                    </div>
+                    <p style="margin-bottom: 8px;">
+                        Based on the type of host, there are four different types of viruses:
+                    </p>
+                    <p style="margin-bottom: 8px;font-weight: bold;">
+                        1. Animal viruses.
+                    </p>
+                    <p style="margin-bottom: 8px;">
+                        These viruses infect by invading the cells of animals, including humans. Prominent examples of
+                        animal viruses include the influenza virus, mumps virus, rabies virus, poliovirus, Herpes virus,
+                        etc.
+                    </p>
+                    <p style="margin-bottom: 8px;font-weight: bold;">
+                        2. Plant viruses.
+                    </p>
+                    <p style="margin-bottom: 8px;">
+                        These viruses infect plants by invading the plant cells. Well-known examples of plant virus
+                        include the potato virus, tobacco mosaic virus, beet yellow virus, and turnip yellow virus,
+                        cauliflower mosaic virus, etc.
+                    </p>
+                    <p style="margin-bottom: 8px;font-weight: bold;">
+                        3. Bacteriophage.
+                    </p>
+                    <p style="margin-bottom: 8px;">
+                        The virus which infects bacterial cells is known as bacteriophage. There are many varieties of
+                        bacteriophages, such as DNA virus, MV-11, RNA virus, λ page, etc.
+                    </p>
+                    <p style="margin-bottom: 8px;font-weight: bold;">
+                        4. Insect virus.
+                    </p>
+                    <p style="margin-bottom: 8px;">
+                        The virus which infects insects is known as Insect virus, also called the viral pathogen of
+                        insects. These viruses are considered as a powerful biocontrol agent in the landscape of modern
+                        agriculture. Ascovirus virions and Entomopox virus, are best examples for insect virus.
+                    </p>
+                    <div class="row">
+                        <h5 style="color: #813588;">Based on the mode of transmission</h5>
+                    </div>
+                    <p style="margin-bottom: 8px;">
+                        Based on the type of host, there are four different types of viruses:
+                    </p>
+                    <p style="margin-bottom: 8px;font-weight: bold;">
+                        1. Airborne infections – Transmission of the virus through the air into the respiratory tract.
+                        E.g. Swine flu, and Rhinovirus.
+                    </p>
+                    <p style="margin-bottom: 8px;font-weight: bold;">
+                        2. Fecal oral route – Transmission of the virus through the contaminated water or food.
+                    </p>
+                    <p style="margin-bottom: 8px;">
+                        E.g. Hepatitis A virus, Poliovirus, Rotavirus.
+                    </p>
+                    <p style="margin-bottom: 8px;font-weight: bold;">
+                        3. Sexually transmitted diseases – Transmission of the virus through sexual contacts with the
+                        infected person.
+                    </p>
+                    <p style="margin-bottom: 8px;">
+                        E.g. Retrovirus, human papillomavirus, etc.
+                    </p>
+                    <p style="margin-bottom: 8px;font-weight: bold;">
+                        4. Transfusion-transmitted infections- Transmission of the virus through the blood transfusion.
+                    </p>
+                    <p style="margin-bottom: 8px;">
+                        E.g. Hepatitis B virus, Human Immunodeficiency Virus, etc.
+                    </p>
+                    <p style="margin-bottom: 8px;font-weight: bold;">
+                        5. Zoonoses -Transmission of the virus through the biting of infected animals, birds, and
+                        insects to human.
+                    </p>
+                    <p style="margin-bottom: 8px;">
+                        E.g. Rabies virus, Alpha virus, Flavivirus, Ebola virus, etc.
+                    </p>
+                    <div class="row">
+                        <h5 style="padding: 2%;color: white;background-color: red;width: 100%;text-align: center;">
+                            Vertext Sysems will classifies viruses based on THE PRESENCE OF NUCLEIC ACIDS</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container" style="background-color: #c5c7c9;color: #4b4e53;margin-top: 2%;">
+            <div class="row" style="padding: 4%;">
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <div class="row">
+                        <h5>CONTACT US</h5>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <h6 style="color: black;">Address</h6>
+                    </div>
+                    <div class="row">
+                        <h6>VERTEX SYSTEMS, INC. <br> 2550 Corporate Exchange Drive, Suite 104, <br>
+                            Columbus, OH 43231
+                        </h6>
+                    </div>
+
+                    <div class="row">
+                        <h6>VERTEX SYSTEMS, INC.
+                            <br>
+                            P.O. Box 430
+                            <br>
+                            Newark, OH 43058-0430
+                        </h6>
+                    </div>
+                    <div class="row">
+                        <H6 style="color: black;">Phone</H6>
+                    </div>
+                    <div class="row">
+                        <h6>Please contact us at <span style="color: red;">800–536–3427</span> to arrange.
+                        </h6>
+                    </div>
+                    <div class="row">
+                        <ul class="list-unstyled d-flex ">
+                            <li><a href="#" class="p-2"><span class="fa fa-twitter"
+                                        style="font-size:1.5rem; color:#4b4e53;"></span></a>
+                            </li>
+                            <li><a href="#" class="p-2"><span class="fa fa-facebook"
+                                        style="font-size:1.5rem;color:#4b4e53;"></span></a>
+                            </li>
+                            <li><a href="#" class="p-2"><span class="fa fa-linkedin"
+                                        style="font-size:1.5rem;color:#4b4e53;"></span></a>
+                            </li>
+                            <li><a href="#" class="p-2"><span class="fa fa-instagram"
+                                        style="font-size:1.5rem;color:#4b4e53;"></span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <div class="row">
+                        <h5>SITE MAP</h5>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <a href="">
+                            <h6 style="color: black;">Home</h6>
+                        </a>
+                    </div>
+                    <div class="row">
+                        <a href="">
+                            <h6 style="color: black;">About us</h6>
+                        </a>
+                    </div>
+                    <div class="row">
+                        <a href="">
+                            <h6 style="color: black;">Types Of Virus</h6>
+                        </a>
+                    </div>
+                    <div class="row">
+                        <a href="">
+                            <h6 style="color: black;">Year wise listing</h6>
+                        </a>
+                    </div>
+                    <div class="row">
+                        <a href="">
+                            <h6 style="color: black;">Contact</h6>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <div class="row">
+                        <h5>TYPES OF VIRUS</h5>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <h6 style="color: black;">DNA VIRUS</h6>
+                    </div>
+                    <div class="row">
+                        <h6 style="color: black;">RNA VIRUS</h6>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <div class="row">
+                        <h5>MAP</h5>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12203.997837115712!2d-82.35875477328804!3d40.12001552909294!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x883817e2ed9c6475%3A0xd4db3b9bf4a74ea7!2sNewark%2C%20Ohio%2043058%2C%20Hoa%20K%E1%BB%B3!5e0!3m2!1svi!2s!4v1610331668802!5m2!1svi!2s"
+                            width="100%" height="250" frameborder="0" style="border:0;" allowfullscreen=""
+                            aria-hidden="false" tabindex="0"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
+<script>
+    var video = document.getElementById("myVideo");
+    var btn = document.getElementById("myBtn");
+    function myFunction() {
+        if (video.paused) {
+            video.play();
+            btn.innerHTML = "Pause";
+        } else {
+            video.pause();
+            btn.innerHTML = "Play";
+        }
+    }
+    /* ------------------------------ */
+    function openNav() {
+        document.getElementById("mySidepanel").style.width = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidepanel").style.width = "0";
+    }
+
+    var dropdown = document.getElementsByClassName("dropdown-btn");
+    var i;
+
+    for (i = 0; i < dropdown.length; i++) {
+        dropdown[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var dropdownContent = this.nextElementSibling;
+            if (dropdownContent.style.display === "block") {
+                dropdownContent.style.display = "none";
+            } else {
+                dropdownContent.style.display = "block";
+            }
+        });
+    }
+    
+    function aClick(ID){
+        var url = 'LayoutVirusDetail.html';
+        var getIDVR = ID;
+        localStorage.setItem("storageName",getIDVR);
+        url = url + "?id=" + getIDVR;
+        window.open(url, '_blank');
+    }
+</script>

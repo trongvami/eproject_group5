@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vertex System</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <style>
+        /*-------------- */
+        .helpfull:hover {
+            color: #4f167c;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .harmfull:hover {
+            color: #4f167c;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /*-------------- */
+        .influencevs:hover {
+            color: blue;
+            background-color: #e6e7e9;
+        }
+
+        /* ------------- */
+        li>div>a:hover {
+            /* font-weight: bold; */
+            background-color: azure;
+            color: blue !important;
+        }
+
+        li>div>ul>li>a:hover {
+            font-weight: bold;
+            background-color: azure;
+            color: blue !important;
+        }
+
+        .nvs:hover {
+            font-size: 15px;
+            padding-bottom: 1%;
+            font-weight: bold;
+            color: blue !important;
+            
+        }
+
+        .nvsHover:hover{
+            border-bottom: 2px solid red;
+        }
+        .nvsHover.active{
+            border-bottom: 2px solid red;
+        }
+
+        .headerSearch {
+            padding-right: 50% !important;
+            border-top: none !important;
+            background-color: #f8f9fa;
+            border-left: none !important;
+            border-right: none !important;
+        }
+
+        input {
+            outline: none !important;
+        }
+
+        @media (max-width: 1000px) {
+            #Searchtext {
+                display: inline-block;
+                width: 100%;
+                vertical-align: middle;
+                margin-right: .5rem !important;
+            }
+
+            #btnSubmit {
+                margin-top: 20px !important;
+            }
+        }
+
+        /* ------------------------------------------------ */
+
+        #myVideo {
+            position: static;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+        }
+
+        .contentabc {
+            position: absolute;
+            bottom: 8px;
+            color: #f1f1f1;
+            width: 100%;
+            padding: 20px;
+        }
+
+        #myBtn {
+            width: 200px;
+            font-size: 18px;
+            padding: 10px;
+            border: none;
+            background: #000;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        #myBtn:hover {
+            background: #ddd;
+            color: black;
+        }
+
+        /* ---------------------------------------------- */
+
+        .btnHover {
+            border-radius: 4px;
+            background-color: #f4511e;
+            border: none;
+            color: #FFFFFF;
+            text-align: center;
+            font-size: 20px;
+
+
+            transition: all 0.5s;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .btnHover span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+        }
+
+        .btnHover span:after {
+            content: '\00bb';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -20px;
+            transition: 0.5s;
+        }
+
+        .btnHover:hover span {
+            padding-right: 30px;
+        }
+
+        .btnHover:hover span:after {
+            opacity: 1;
+            right: 0;
+        }
+
+        /* ------------------------------------- */
+        .classificationVirus:hover {
+            box-shadow: #5da6ee 0px 0px 8px 0px;
+            opacity: 65%;
+        }
+
+        .TeamFive:hover {
+            opacity: 85%;
+        }
+    </style>
+
+</head>
+
+<body>
+    <header>
+
+    </header>
+    <div class="container" style="padding-left: 0px;padding-right: 0px;">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="position: sticky !important;">
+            <a class="navbar-brand" href="home.html"><img src="images/logo_short-200x71.png" alt=""
+                    style="width: 70%;"></a>
+            <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse"
+                data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="collapsibleNavId" style="width: 100%;">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0" style="margin-right: 0px !important; width: 70%;">
+                    <li class="nav-item nvs nvsHover" style="padding-right: 2rem;">
+                        <a class="nav-link" href="home.html">Home<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active nvs nvsHover" style="padding-right: 2rem;">
+                        <a class="nav-link" href="aboutus.html">About us</a>
+                    </li>
+
+                    <li class="nav-item nvs nvsHover"  style="padding-right: 2rem;">
+                        <a class="nav-link" href="typeOFVirus.html">Types of virus</a>
+                    </li>
+                    <li class="nav-item nvs nvsHover" style="padding-right: 2rem;">
+                        <a class="nav-link" href="yearWiseListing.html">Year wise listing</a>
+                    </li>
+                    <li class="nav-item nvs nvsHover" style="padding-right: 2rem;">
+                        <a class="nav-link" href="contactus.html">Contact us</a>
+                    </li>
+                </ul>
+
+                <form class="form-inline my-2 my-lg-0 " style="flex-flow: nowrap !important;width: 30%;">
+                    <div class="input-group mb-3" style="margin-top: 10px; width: 100% !important;">
+
+                        <input id="headerSearch" type="text" class="form-control headerSearch" placeholder="Search">
+                        <div class="input-group-append">
+                            <span class="input-group-text" style="border: none !important;background-color: #f8f9fa;"><a
+                                    href=""><i class="fa fa-search" style="font-size: 20px;"></i></a></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </nav>
+    </div>
+
+    <section>
+        <div class="container" style="padding: 3%;">
+            <br>
+            <div class="container">
+                <div class="row" style="border-left: 2px solid rgb(245, 101, 18);">
+                    <h5 style="padding-left: 15px;color: #acadaf;padding-top: 5px;">ABOUT US</h5>
+                </div>
+
+                <div class="row">
+                    <h3>WE ARE VERY <span style="font-weight: bold;">HAPPY</span></h3>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-11 col-md-11 col-lg-11" style="padding-left: 0px;padding-right: 0px;">
+                        <p style="margin-bottom: 0px;font-size: 17px;">
+                            <span style="font-weight: bold;">When</span>
+                            Vertex will be your first choice when looking for information.
+                            After years of researching, researching, updating and summarizing information sources,
+                            we have developed the website to provide readers with the most accurate information....
+                        </p>
+                    </div>
+                    <div class="col-sm-1 col-md-1 col-lg-1">
+
+                    </div>
+
+                </div>
+                <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel8">Principles and purposes</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <img class="card-img-top align-self-center" src="images/virusHome1.jpg"
+                                            alt="Card image cap">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>
+                                            - Vertex will be your first choice when looking for information.
+                                        </p>
+                                        <p>
+                                            - After years of researching, researching, updating and summarizing
+                                            information
+                                            sources, we have developed the website to provide readers with the most
+                                            accurate
+                                            information.
+                                        </p>
+                                        <p>
+                                            - We are confident that we are the place for your readers' confidence!
+                                            Vertex
+                                            started
+                                            operations in 2020 and everyone deserves an online virus website with
+                                            accurate
+                                            information everyday.
+                                        </p>
+
+                                        <p>
+                                            - Vertex is alway update information about viruses in the most accurate and
+                                            complete
+                                            manner, virus changes and changes in the world, ensuring that information
+                                            sources
+                                            are not misleading.
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="container">
+                <div class="row">
+                    <a href="index.html" class="btn btn-primary btnHover" data-toggle="modal"
+                        data-target=".bd-example-modal-lg"><span>Read More</span></a>
+                </div>
+            </div>
+
+            <!-- TEAM SECTION START -->
+
+            <br>
+            <br>
+
+            <div class="container">
+                <div class="row" style="border-left: 2px solid rgb(245, 101, 18);">
+                    <h5 style="padding-left: 15px;color: #acadaf;padding-top: 5px;">Member Support Team</h5>
+                </div>
+            </div>
+
+            <div class="container">
+                <div style="margin-top: 2%;">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-lg-3 TeamFive" style="
+                        box-shadow: #5da6ee 0px 0px 4px 0px; margin-top: 2%;">
+                            <div class="row">
+                                <img src="images/trong.jpg" alt="" style="width: 100%;height: 250px;">
+                            </div>
+                            <div class="row" style="margin-top: 10px;padding-left: 10px;">
+                                <h4>Trong</h4>
+                            </div>
+                            <div class="row" style="margin-top: 10px;padding-left: 10px;">
+                                <p>
+                                    Vertex System Counselors
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-sm-1 col-md-1 col-lg-1">
+
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3 TeamFive" style="
+                        box-shadow: #5da6ee 0px 0px 4px 0px;margin-top: 2%;">
+                            <div class="row">
+                                <img src="images/member_alam.png" alt="" style="width: 100%;height: 250px;">
+                            </div>
+                            <div class="row" style="margin-top: 10px;padding-left: 10px;">
+                                <h4>Lam</h4>
+                            </div>
+                            <div class="row" style="margin-top: 10px;padding-left: 10px;">
+                                <p>
+                                    CEO and senior management
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-sm-1 col-md-1 col-lg-1">
+
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3 TeamFive" style="
+                        box-shadow: #5da6ee 0px 0px 4px 0px;margin-top: 2%;">
+                            <div class="row">
+                                <img src="images/member_tuan.PNG" alt="" style="width: 100%;height: 250px;">
+                            </div>
+                            <div class="row" style="margin-top: 10px;padding-left: 10px;">
+                                <h4>Tuan</h4>
+                            </div>
+                            <div class="row" style="margin-top: 10px;padding-left: 10px;">
+                                <p>
+                                    Vertex System Counselors and junior management
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container" style="background-color: #c5c7c9;color: #4b4e53;margin-top: 2%;">
+            <div class="row" style="padding: 4%;">
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <div class="row">
+                        <h5>CONTACT US</h5>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <h6 style="color: black;">Address</h6>
+                    </div>
+                    <div class="row">
+                        <h6>VERTEX SYSTEMS, INC. <br> 2550 Corporate Exchange Drive, Suite 104, <br>
+                            Columbus, OH 43231
+                        </h6>
+                    </div>
+
+                    <div class="row">
+                        <h6>VERTEX SYSTEMS, INC.
+                            <br>
+                            P.O. Box 430
+                            <br>
+                            Newark, OH 43058-0430
+                        </h6>
+                    </div>
+                    <div class="row">
+                        <H6 style="color: black;">Phone</H6>
+                    </div>
+                    <div class="row">
+                        <h6>Please contact us at <span style="color: red;">800–536–3427</span> to arrange.
+                        </h6>
+                    </div>
+                    <div class="row">
+                        <ul class="list-unstyled d-flex ">
+                            <li><a href="#" class="p-2"><span class="fa fa-twitter"
+                                        style="font-size:1.5rem; color:#4b4e53;"></span></a>
+                            </li>
+                            <li><a href="#" class="p-2"><span class="fa fa-facebook"
+                                        style="font-size:1.5rem;color:#4b4e53;"></span></a>
+                            </li>
+                            <li><a href="#" class="p-2"><span class="fa fa-linkedin"
+                                        style="font-size:1.5rem;color:#4b4e53;"></span></a>
+                            </li>
+                            <li><a href="#" class="p-2"><span class="fa fa-instagram"
+                                        style="font-size:1.5rem;color:#4b4e53;"></span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <div class="row">
+                        <h5>SITE MAP</h5>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <a href="">
+                            <h6 style="color: black;">Home</h6>
+                        </a>
+                    </div>
+                    <div class="row">
+                        <a href="">
+                            <h6 style="color: black;">About us</h6>
+                        </a>
+                    </div>
+                    <div class="row">
+                        <a href="">
+                            <h6 style="color: black;">Types Of Virus</h6>
+                        </a>
+                    </div>
+                    <div class="row">
+                        <a href="">
+                            <h6 style="color: black;">Year wise listing</h6>
+                        </a>
+                    </div>
+                    <div class="row">
+                        <a href="">
+                            <h6 style="color: black;">Contact</h6>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <div class="row">
+                        <h5>TYPES OF VIRUS</h5>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <h6 style="color: black;">DNA VIRUS</h6>
+                    </div>
+                    <div class="row">
+                        <h6 style="color: black;">RNA VIRUS</h6>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <div class="row">
+                        <h5>MAP</h5>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12203.997837115712!2d-82.35875477328804!3d40.12001552909294!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x883817e2ed9c6475%3A0xd4db3b9bf4a74ea7!2sNewark%2C%20Ohio%2043058%2C%20Hoa%20K%E1%BB%B3!5e0!3m2!1svi!2s!4v1610331668802!5m2!1svi!2s"
+                            width="100%" height="250" frameborder="0" style="border:0;" allowfullscreen=""
+                            aria-hidden="false" tabindex="0"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
+<script>
+    /* viết script thay đổi thuộc tính width input search khi co ngắn màn hình console lại */
+
+    $(document).ready(function (e) {
+        $(".zi").hide();
+        $(".sol").hide();
+        $(".harmfull").click(function () {
+            $(".zi").show();
+            // $(".sol").hide();
+        });
+        $(".helpfull").click(function () {
+            $(".sol").show();
+            // $(".zi").hide();
+        });
+
+        var video = document.getElementById("myVideo");
+        var btn = document.getElementById("myBtn");
+        myFunction();
+        helpfullClick();
+        harmfullClick();
+        $('img[usemap]').rwdImageMaps();
+    });
+
+    function myFunction() {
+        if (video.paused) {
+            video.play();
+            btn.innerHTML = "Pause";
+        } else {
+            video.pause();
+            btn.innerHTML = "Play";
+        }
+    }
+</script>
