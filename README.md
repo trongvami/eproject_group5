@@ -19,6 +19,7 @@ Project title: Vertex system website
 ============================
 
 github report link:  https://github.com/trongvami/eproject_group5/tree/main/document
+
 eProject published at : https://trongvami.github.io/eproject_group5/home.html
 
 ============================
