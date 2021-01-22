@@ -8,6 +8,7 @@ Project title: Vertex system website
 
 ========> Group 5 <=========
 3 collaborators:
+             
              Nguyen Duc Trong (nluductrong@gmail.com) Student1276113
 
              Pham Hung Lam (phamhunglam@gmail.com) Student1280957
@@ -17,7 +18,7 @@ Project title: Vertex system website
              
 ============================
 
-github report link:  
+github report link:  https://github.com/trongvami/eproject_group5/tree/main/document
 eProject published at : https://trongvami.github.io/eproject_group5/home.html
 
 ============================
